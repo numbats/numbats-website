@@ -101,7 +101,7 @@ footer p {
 
 a {
   text-decoration: none;
-  color:  #ffffff;
+  color: #738C6E;
   text-shadow: none;
 
   transition: color 0.5s ease;
@@ -117,6 +117,11 @@ a {
 }
 
 a:hover, a:focus {color: #CC5900;}
+
+footer a {
+  color: #FFFFFF;
+  text-decoration: underline;
+}
 
 em {
   font-style: italic;
