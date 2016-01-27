@@ -38,7 +38,7 @@
   <div class="graph" style="height: 768px;"></div>
   <script type="text/javascript">
   $(function() {
-      $.getJSON('http://mitchelloharawild.com/BETTONG/rest.php?op=set&id?op=get&id='+'game1', function(data) {
+      $.getJSON('http://mitchelloharawild.com/BETTONG/rest.php?op=get&id='+'game1', function(data) {
         $('div#tournament .graph').bracket({
             init: data,
           })
