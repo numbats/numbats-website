@@ -31,41 +31,13 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
 
-<hr>
+      <hr>
       
-<h2>Tournament brackets (edit mode)</h2>
-<div id="tournament">
-  <div class="graph" style="height: 768px;"></div>
-  <h3>Save functionality (click team and score labels to edit)</h3>
-  <p>Note that you can press return when entering scores to procede to next
-  field.</p>
-  <script type="text/javascript">
-  /* Called whenever bracket is modified
-   *
-   * data:     changed bracket object in format given to init
-   * userData: optional data given when bracket is created.
-   */
-  function saveFn(data, userData) {
-    var json = jQuery.toJSON(data)
-    $('#saveOutput').text('POST '+userData+' '+json)
-    jQuery.ajax(userData, {contentType: 'application/json',
-                                  dataType: 'json',
-                                  type: 'post',
-                                  data: json})
-
-    $.getJSON('http://mitchelloharawild.com/BETTONG/rest.php?op=set&id='+'game1'+'&data='+json)
-  }
-
-  $(function() {
-      $.getJSON('http://mitchelloharawild.com/BETTONG/rest.php?op=get&id='+'game1', function(data) {
-        $('div#tournament .graph').bracket({
-            init: data,
-            save: saveFn
-          })
-      })
-    })
-  </script>
-</div>
+      <h2>Tournament brackets (edit mode)</h2>
+      <h3>Save functionality (click team and score labels to edit)</h3>
+      <p>Note that you can press return when entering scores to procede to next
+      field.</p>
+      <iframe src="http://mitchelloharawild.com/BETTONG/iedit.html" style="border:solid 1px #777" width="1000" height="768" frameborder="0" scrolling="no"></iframe>
       </section>
     </div>
 
