@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script type="text/javascript" src="site/jquery-1.6.2.min.js"></script>
+	<script type="text/javascript" src="site/jquery.json-2.2.min.js"></script>
+	<script type="text/javascript" src="jquery-bracket/dist/jquery.bracket.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="jquery-bracket/dist/jquery.bracket.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../ourstylesheet.css">
+
+    <title>BETTONG: Business & Econometrics Table Tennis Open for NUMBATS and Guests</title>
+</head>
+
+
+<body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <a href="http://numbats.github.io/BETTONG/">
+        <div style="height:40px"></div>
+        <header class="inner">
+          <img src="bettong.png" align="right" width="300" style="margin-top:-70px">
+          <h1 id="project_title"> Table Tennis (admin)</h1>
+          <h2 id="project_tagline"> Business & Econometrics Table Tennis Open for NUMBATS and Guests (BETTONG)</h2>
+
+        </header></a>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+
+      <hr>
+      
+      <h2>Tournament brackets (edit mode)</h2>
+      <h3>Save functionality (click team and score labels to edit)</h3>
+      <p>Note that you can press return when entering scores to procede to next
+      field.</p>
+      <div id="tournament">
+        <div class="graph" style="height: 768px;"></div>
+        <script type="text/javascript">
+        /* Called whenever bracket is modified
+         *
+         * data:     changed bracket object in format given to init
+         * userData: optional data given when bracket is created.
+         */
+        function saveFn(data, userData) {
+          var json = jQuery.toJSON(data)
+          $('#saveOutput').text('POST '+userData+' '+json)
+          jQuery.ajax(userData, {contentType: 'application/json',
+                                        dataType: 'json',
+                                        type: 'post',
+                                        data: json})
+
+          $.getJSON('http://mitchelloharawild.com/BETTONG/rest.php?op=set&id='+'game1'+'&data='+json)
+        }
+
+        $(function() {
+            $.getJSON('http://mitchelloharawild.com/BETTONG/rest.php?op=get&id='+'game1', function(data) {
+              $('div#tournament .graph').bracket({
+                  init: data,
+                  save: saveFn
+                })
+            })
+          })
+        </script>
+      </div>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <a href="http://numbats.github.io/">
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">    
+        <p>Copyright ©2015-6 NUMBATS</p>
+      </footer>
+    </div></a>
+
+  </body>
+</html>
