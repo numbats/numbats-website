@@ -1,57 +1,79 @@
 <!doctype html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" media="screen" href="ourstylesheet.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" media="screen" href="ourstylesheet.css">
+  <link href='fullcalendar/fullcalendar.min.css' rel='stylesheet' />
+  <link href='fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+  <script src='fullcalendar/lib/moment.min.js'></script>
+  <script src='fullcalendar/lib/jquery.min.js'></script>
+  <script type='text/javascript' src='fullcalendar/fullcalendar.min.js'></script>
+  <script type='text/javascript' src='fullcalendar/gcal.js'></script>
+  <script>
+    $(document).ready(function() {
+      $('#calendar').fullCalendar({
+        fixedWeekCount: false,
+        height: "auto",
+        googleCalendarApiKey: 'AIzaSyDscvAe5EOZiO29I3icz9lS6GoXsOrfG-0',
+        events: {
+          googleCalendarId: 't0umouvaoo3h62kcfcj7vcfck8@group.calendar.google.com',
+          className: 'gcal-event' // an option!
+        },
+        eventColor: '#738C6E'
+      });
+    });
+  </script>
 
-    <title>NUMBAT: News and Updates of the Monash Business Analytics Team</title>
+  <title>NUMBAT: News and Updates of the Monash Business Analytics Team</title>
 </head>
 
 
 <body>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-        <img src="numbat-filtered.png" align="right" width="200">
+  <!-- HEADER -->
+  <div id="header_wrap" class="outer">
+    <header class="inner">
+    <img src="numbat-filtered.png" align="right" width="200">
 
-          <h1 id="project_title">NUMBAT</h1>
-          <h2 id="project_tagline">News and Updates of the Monash Business Analytics Team </h2>
+      <h1 id="project_title">NUMBAT</h1>
+      <h2 id="project_tagline">News and Updates of the Monash Business Analytics Team </h2>
 
-        </header>
-    </div>
+    </header>
+  </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
+  <!-- MAIN CONTENT -->
+  <div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
 
-      <h3> <a href="http://wombat2016.org"> WOMBAT 2016 </a></h3> Workshop organised by the Monash Business Analytics Team
-      <h3> Visitors </h3>
+    <h3> <a href="http://wombat2016.org"> WOMBAT 2016 </a></h3> Workshop organised by the Monash Business Analytics Team
+    <h3> Visitors </h3>
 
-      <ul>
-	<li> Sep 2015-July 2016 Carson Sievert, Statistics, Iowa State University </li>
-	<li> Feb 8 - May 8 2016  Heike Hofmann, Statistics, Iowa State University </li>
-	<li> Feb 16 - Feb 23 2016  Hadley Wickham, RStudio Inc </li>
-	<li> Feb 15 - Mar 20 2016  Barret Schloerke, Statistics, Purdue University </li>
-	<li> Mar 29 - Mar 30 2016  Genevera Allen, Statistics, Rice University </li>
-      </ul>
-      <h3> Seminars </h3>
+    <ul>
+    	<li> Sep 2015-July 2016 Carson Sievert, Statistics, Iowa State University </li>
+    	<li> Feb 8 - May 8 2016  Heike Hofmann, Statistics, Iowa State University </li>
+    	<li> Feb 16 - Feb 23 2016  Hadley Wickham, RStudio Inc </li>
+    	<li> Feb 15 - Mar 20 2016  Barret Schloerke, Statistics, Purdue University </li>
+    	<li> Mar 29 - Mar 30 2016  Genevera Allen, Statistics, Rice University </li>
+    </ul>
+    <h3> Seminars </h3>
+    <div id='calendar'></div>
 
-<iframe src="https://calendar.google.com/calendar/embed?src=t0umouvaoo3h62kcfcj7vcfck8%40group.calendar.google.com&amp;title=NUMBAT&amp;height=600&amp;wkst=1&amp;bgcolor=%23f2f2f2&amp;ctz=Australia%2FSydney" style="border:solid 0px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-      
-<hr>
+    <hr>
 
-      <h3> Group members </h3>
+    <h3> Group members </h3>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p> Copyright ©2016 Monash University Business Analytics Team, <a href="https://business.monash.edu/econometrics-and-business-statistics"> Econometrics and Business Statistics, Monash University, Australia</a> </p>
-      </footer>
-    </div>
+    <h3><a href="BETTONG/index.html"> BETTONG </a></h3> Business & Econometrics Table Tennis Open for NUMBATS and Guests
 
-  </body>
+
+  <!-- FOOTER  -->
+  <div id="footer_wrap" class="outer">
+    <footer class="inner">
+      <p> Copyright ©2016 Monash University Business Analytics Team, <a href="https://business.monash.edu/econometrics-and-business-statistics"> Econometrics and Business Statistics, Monash University, Australia</a> </p>
+    </footer>
+  </div>
+
+</body>
 </html>
 
 
