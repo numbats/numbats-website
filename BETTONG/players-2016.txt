@@ -1,21 +1,20 @@
 2016 player list
 
-Mitch
-Di
-Diana S
-Lis
-David F
-Elke
-Mehmet
-Julia
-Alwin
-Steph
-Braden
-Madeline
-Stephanie
-Souhaib
-Paul + Dev paul.t.nguyen@monash.edu (own doubles team)
-Earo + Pusila
-Dili + Tee
-Manh Pham
-Thiyanga & Dilini
+Players
+     [,1]        [,2]      
+ [1,] "Souhaib"  "David"   
+ [2,] "Elke"     "Julia"   
+ [3,] "Braden"   "Mehmet"  
+ [4,] "Mitch"    "Mike"    
+ [5,] "ManhP"    "Alwin"   
+ [6,] "Stephanie""Steph"   
+ [7,] "Lis"      "Diana"   
+ [8,] "Di"       "Madeline"
+ [9,] "Paul"     "Dev"
+[10,] "Earo"     "Pusila"
+[11,] "Dili"     "Tee"
+
+Team names
+ [1] "Bye"     "Yabby"   "Bye"     "Bilby"   "Brolga"  "Bye"    
+ [7] "Jabiru"  "Echidna" "Cuscus"  "Dingo"   "Bye"     "Quoll"  
+[13] "Goanna"  "Bye"     "Dugong"  "Galah"  
