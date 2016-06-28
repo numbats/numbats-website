@@ -30,32 +30,43 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
 
-<hr>
-      
-<h4><font color="red">Registration for season 2 now open!</font> </h4>
-<h2>Tournament brackets</h2>
-<div id="tournament">
-  <div class="graph" style="height: 768px;"></div>
-  <script type="text/javascript">
-  $(function() {
-      $.getJSON('http://mitchelloharawild.com/BETTONG/rest.php?op=get&id='+'game2', function(data) {
-        $('div#tournament .graph').bracket({
-            init: data,
+      <hr>
+            
+      <h4><font color="red">Round 1 games due 5PM Friday July 1st</font> </h4>
+      <h2>Tournament brackets</h2>
+      <div id="tournament">
+        <div class="graph" style="height: 768px;"></div>
+        <script type="text/javascript">
+        $(function() {
+            $.getJSON('http://mitchelloharawild.com/BETTONG/rest.php?op=get&id='+'game2', function(data) {
+              $('div#tournament .graph').bracket({
+                  init: data,
+                })
+            })
           })
-      })
-    })
-  </script>
-</div>
+        </script>
+      </div>
+      <h2>Teams</h2> 
+      <table > 
+        <tr> <th> Team names </th> <th> Player 1 </th> <th> Player 2 </th>  </tr> 
+        <tr> <td> Yabby </td> <td> Souhaib </td> <td> David </td> </tr> 
+        <tr> <td> Bilby </td> <td> Elke </td> <td> Julia </td> </tr> 
+        <tr> <td> Brolga </td> <td> Braden </td> <td> Mehmet </td> </tr> 
+        <tr> <td> Jabiru </td> <td> Mitchell </td> <td> Mike </td> </tr> 
+        <tr> <td> Echidna </td> <td> Manh 6</td> <td> Alwin </td> </tr> 
+        <tr> <td> Cuscus </td> <td> Stephanie </td> <td> Steph </td> </tr> 
+        <tr> <td> Dingo </td> <td> Lis </td> <td> Diana </td> </tr> 
+        <tr> <td> Quoll </td> <td> Di </td> <td> Madeline </td> </tr> 
+        <tr> <td> Goanna </td> <td> Paul </td> <td> Dev </td> </tr> 
+        <tr> <td> Dugong </td> <td> Earo </td> <td> Pusila </td> </tr> 
+        <tr> <td> Galah </td> <td> Dili </td> <td> Tee </td> </tr>
+      </table> 
 
-<h2>Basic rules</h2>
-A full list of rules for this competition can be found here: <a href="http://numbat.space/BETTONG/rules.html">http://numbat.space/BETTONG/rules.html</a><br><br>
-If you're new to table tennis or need a refresh on the rules, watch the video below.
-<iframe width="560" height="315" src="https://www.youtube.com/embed/zSKpxB3rOB8" frameborder="0" allowfullscreen></iframe>
-<br>
-
-
-<h2>Registration</h2>
-      Email Di or Mitch. Registration closes Monday 27th June.
+      <h2>Basic rules</h2>
+      A full list of rules for this competition can be found here: <a href="http://numbat.space/BETTONG/rules.html">http://numbat.space/BETTONG/rules.html</a><br><br>
+      If you're new to table tennis or need a refresh on the rules, watch the video below.
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/zSKpxB3rOB8" frameborder="0" allowfullscreen></iframe>
+      <br>
       </section>
     </div>
 
