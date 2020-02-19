@@ -2,7 +2,6 @@
 authors:
 - admin
 bio: 
-  matter.
 education:
   courses:
   - course: PhD in Statistics
