@@ -9,13 +9,9 @@ education:
     year: 2015
 email: ""
 interests:
-- Applied Statistics
-- Biometrics
-- Bioinformatics
-- Data Visualisation
-- Experimental Design
-- Quantitative Genetics
-- Statistical Modelling
+- applied statistics
+- mixed models
+- experimental design
 name: Emi Tanaka
 organizations:
 - name: Monash University
