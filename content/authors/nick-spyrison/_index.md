@@ -34,5 +34,4 @@ user_groups:
 - Graduate student
 ---
 
-
-Sayani is a PhD candidate at the Econometrics and Business Statistics Department of Monash University. She is focussing on building visualization and statistical methods for analyzing large amounts of temporal data. She is passionate about putting to use statistics to solve real world problems and almost always use R to do that.
+Nick is a PhD candidate at Monash University, Melbourne Austalia, researching high dimensional visualization. In the same way that shadow puppets project light from a 3D object down to a 2D shadow, you can do the same with a p>3-dimensional data. 
