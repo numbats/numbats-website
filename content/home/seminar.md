@@ -51,7 +51,9 @@ subtitle = ""
 +++
 
 
-
 We hold regular seminars during the semester period (March-June, August-Nov).
 
 If you are interested to receive notice of the seminars and other events, see [here](XXX).
+
+
+<iframe src="https://calendar.google.com/calendar/b/0/embed?height=600&amp;wkst=2&amp;bgcolor=%23006dae&amp;ctz=Australia%2FSydney&amp;src=dDB1bW91dmFvbzNoNjJrY2Zjajd2Y2ZjazhAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;color=%23E4C441&amp;showTabs=1&amp;mode=AGENDA" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
