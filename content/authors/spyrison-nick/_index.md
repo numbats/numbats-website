@@ -31,7 +31,8 @@ social:
   link: https://github.com/nspyrison
 superuser: true
 user_groups:
-- Graduate student
+- Current
+- Graduate students
 ---
 
 Nick is a PhD candidate at Monash University, Melbourne Austalia, researching high dimensional visualization. In the same way that shadow puppets project light from a 3D object down to a 2D shadow, you can do the same with a p>3-dimensional data. 

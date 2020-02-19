@@ -30,6 +30,7 @@ social:
   link: https://github.com/okayama1
 superuser: true
 user_groups:
+- Current
 - Faculty
 ---
 

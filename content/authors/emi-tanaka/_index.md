@@ -32,6 +32,7 @@ social:
   link: https://github.com/emitanaka
 superuser: true
 user_groups:
+- Current
 - Faculty
 ---
 

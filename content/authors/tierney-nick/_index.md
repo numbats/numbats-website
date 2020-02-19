@@ -31,6 +31,7 @@ social:
   link: https://github.com/njtierney
 superuser: true
 user_groups:
+- Current
 - Faculty
 ---
 

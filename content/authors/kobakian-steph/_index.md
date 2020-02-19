@@ -33,6 +33,7 @@ social:
   link: https://github.com/srkobakian
 superuser: true
 user_groups:
+- Current
 - Graduate students
 ---
 

@@ -34,6 +34,7 @@ social:
   link: https://github.com/robjhyndman
 superuser: true
 user_groups:
+- Current
 - Faculty
 ---
 
