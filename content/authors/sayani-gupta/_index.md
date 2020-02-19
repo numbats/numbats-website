@@ -40,7 +40,7 @@ social:
   link: https://github.com/SAYANI07
 superuser: true
 user_groups:
-- Graduate student
+- Graduate students
 ---
 
 

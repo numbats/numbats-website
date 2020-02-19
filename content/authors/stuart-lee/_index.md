@@ -40,7 +40,7 @@ social:
   link: https://github.com/sa-lee
 superuser: true
 user_groups:
-- Graduate student
+- Graduate students
 ---
 
 

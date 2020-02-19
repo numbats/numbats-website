@@ -33,7 +33,7 @@ social:
   link: https://github.com/srkobakian
 superuser: true
 user_groups:
-- Graduate student
+- Graduate students
 ---
 
 Stephanie recently finished a Master of Philosophy focusing on Statistics. Her work presents spatial distributions using alternative visualisations.
