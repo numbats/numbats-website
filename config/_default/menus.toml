@@ -15,7 +15,7 @@
   weight = 30
   
 [[main]]
-  name = "Seminar"
+  name = "Events"
   url = "#seminar"
   weight = 40
   
