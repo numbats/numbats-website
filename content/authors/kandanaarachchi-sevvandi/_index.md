@@ -6,6 +6,7 @@ education: ""
 email: ""
 interests:
 - anomaly detection
+- mathematical statistics
 name: Sevvandi Kandanaarachchi
 organizations:
 - name: RMIT

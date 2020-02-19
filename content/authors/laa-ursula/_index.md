@@ -9,10 +9,10 @@ education:
     institution: Monash University
 email: "Ursula.Laa@monash.edu"
 interests:
-- Data visualisation
 - statistical graphics
-- high-dimensional data analysis
-- machine learning and (particle) physics
+- high-dimensional data
+- machine learning
+- (particle) physics
 name: Ursula Laa
 organizations:
 - name: Monash University

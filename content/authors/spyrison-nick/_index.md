@@ -10,7 +10,9 @@ education:
     year: 2021
 email: "nicholas.spyrison@monash.edu"
 interests:
-- High dimensional visualisation
+- high dimensional visualisation
+- human computer interaction
+- data science
 name: Nicholas Spyrison
 organizations:
 - name: Monash University

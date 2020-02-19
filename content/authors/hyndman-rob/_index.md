@@ -15,6 +15,7 @@ email: ""
 interests:
 - forecasting
 - time series
+- exploratory data analysis
 name: Rob J Hyndman
 organizations:
 - name: Monash University

@@ -5,7 +5,10 @@ bio:
 education: ""
 email: ""
 interests:
-- statistics
+- statistical computing
+- time series
+- forecasting
+- software design
 name: Mitch O'Hara-Wild
 organizations:
 - name: Monash University

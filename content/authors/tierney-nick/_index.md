@@ -9,8 +9,10 @@ education:
     year: 2018
 email: ""
 interests:
-- Exploratory data analysis
+- exploratory data analysis
 - statistical modelling
+- bayesian statistics
+- software design
 name: Nick Tierney
 organizations:
 - name: Monash University

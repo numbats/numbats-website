@@ -16,10 +16,10 @@ education:
     year: 2008
 email: "Sayani.Gupta@monash.edu"
 interests:
-- Computational Statistics
-- Visualization
-- Time series analysis
-- Forecasting
+- computational statistics
+- visualization
+- time series analysis
+- forecasting
 name: Sayani Gupta
 organizations:
 - name: Monash University
