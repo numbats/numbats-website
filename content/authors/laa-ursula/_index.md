@@ -7,11 +7,12 @@ education:
   courses:
   - course: Research Fellow in Statistics
     institution: Monash University
-email: "Pablo.MonteroManso@monash.edu"
+email: "Ursula.Laa@monash.edu"
 interests:
- - Time SeriesForecasting
- - Machine Learning
- - Computational Statistics
+- Data visualisation
+- statistical graphics
+- high-dimensional data analysis
+- machine learning and (particle) physics
 name: Ursula Laa
 organizations:
 - name: Monash University
@@ -21,13 +22,19 @@ social:
 - icon: envelope
   icon_pack: fas
   link: '#contact'
+- icon: twitter
+  icon_pack: fab
+  link: https://twitter.com/UschiLaa
 - icon: github
   icon_pack: fab
-  link: https://github.com/pmontman
+  link: https://github.com/uschiLaa
 superuser: true
 user_groups:
 - Current
-- Post Doctoral Researcher 
+- Post Doctoral Researcher
 ---
 
-Pablo Montero-Manso is a Research Fellow at the Department of Econometrics and Business Statistics of Monash University. He holds a PhD in Statistics from the University of A Coruña, Spain. His research interests include statistical and machine learning for time series analysis, especially for forecasting, classification, clustering and visualization. He has authored or contributed to several R packages, including TSclust for time series clustering.
+Ursula's research is interdisciplinary, connecting her background in physics and her current interest in statistical data visualisation and its application.
+
+She mostly works on high-dimensional problems and uses methods like the grand tour for visualisation of data beyond 3D. We can gain new physics insights by using better visualisations, but at the same time thinking about how to best plot the result also motivates us to develop new visualisation methods!
+
