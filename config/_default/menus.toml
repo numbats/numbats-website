@@ -16,18 +16,13 @@
   
 [[main]]
   name = "Seminar"
-  url = "seminar/"
+  url = "#seminar"
   weight = 40
   
 [[main]]
   name = "Courses"
   url = "courses/"
   weight = 50
-  
-[[main]]
-  name = "Workshop"
-  url = "workshop/"
-  weight = 60
 
 
 [[main]]
