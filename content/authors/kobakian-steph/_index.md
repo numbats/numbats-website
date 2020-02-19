@@ -37,5 +37,5 @@ user_groups:
 - Graduate students
 ---
 
-Stephanie recently finished a Master of Philosophy focusing on Statistics. Her work presents spatial distributions using alternative visualisations.
+Stephanie recently finished a MPhil focusing on Statistics. Her work presents spatial distributions using alternative visualisations.
 Stephanie is a teaching associate in the Econometrics and Business Statistics Faculty at Monash University.
