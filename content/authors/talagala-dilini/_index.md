@@ -8,16 +8,16 @@ education:
   - course: PhD in Statistics
     institution: Monash University
     year: 2019
-email: "pritalagala@gmail.com"
+email: "earo.wang@auckland.ac.nz"
 interests:
 - time series
-- forecasting
-- anomaly detection
-- applied statistics
-name: Priyanga Dilini Talagala
+- data visualisation
+- software design
+- data science
+name: Earo Wang
 organizations:
 - name: Monash University
-  url: "https://prital.netlify.com"
+  url: "https://earo.me/"
 role: Lecturer in Statistics
 social:
 - icon: envelope
@@ -25,10 +25,10 @@ social:
   link: '#contact'
 - icon: twitter
   icon_pack: fab
-  link: https://twitter.com/pridiltal
+  link: https://twitter.com/earowang
 - icon: github
   icon_pack: fab
-  link: https://github.com/pridiltal
+  link: https://github.com/earowang
 superuser: true
 user_groups:
 - Alumni
