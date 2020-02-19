@@ -18,7 +18,7 @@ name: Earo Wang
 organizations:
 - name: Monash University
   url: "https://earo.me/"
-role: Lecturer in Statistics
+role: Lecturer in Statistics, University of Auckland
 social:
 - icon: envelope
   icon_pack: fas

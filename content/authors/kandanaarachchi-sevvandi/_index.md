@@ -10,7 +10,7 @@ interests:
 name: Sevvandi Kandanaarachchi
 organizations:
 - name: RMIT
-role: Lecturer in Statistics
+role: Lecturer in Statistics, RMIT
 social:
 - icon: envelope
   icon_pack: fas
