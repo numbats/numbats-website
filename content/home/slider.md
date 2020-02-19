@@ -22,7 +22,7 @@ height = ""
 
   # Overlay a color or image (optional).
   #   Deactivate an option by commenting out the line, prefixing it with `#`.
-  # overlay_color = "#2962ff"  # An HTML color value.
+  # overlay_color = "#666"  # An HTML color value.
   overlay_img = "numbats_webimage.jpeg"  # Image path relative to your `static/img/` folder.
   overlay_filter = 0.1  # Darken the image. Value in range 0-1.
 
