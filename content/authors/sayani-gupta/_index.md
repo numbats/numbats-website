@@ -5,9 +5,15 @@ bio: My research interests includes visualisation, computational statistics, tim
   matter.
 education:
   courses:
-  - course: PhD
+  - course: PhD in Computational Statistics
     institution: Monash University
     year: 2021
+  - course: MStat in Statistics (QE specialization)
+    institution: Indian Statistical Institute, India
+    year: 2011
+  - course: BSc in Statistics (Honors)
+    institution: St. Xavier's College, India 
+    year: 2008
 email: "Sayani.Gupta@monash.edu"
 interests:
 - Computational Statistics
