@@ -13,12 +13,13 @@ education:
     year: 1988
 email: ""
 interests:
-- Statistical Graphics
+- forecasting
+- time series
 name: Rob J Hyndman
 organizations:
 - name: Monash University
   url: ""
-role: Professor of Statistics and Head of the Department of Econometrics and Business Statistics
+role: Professor of Statistics and Head of Department
 social:
 - icon: envelope
   icon_pack: fas
