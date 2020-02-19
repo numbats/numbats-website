@@ -16,10 +16,10 @@ education:
     year: 2011
 email: ""
 interests:
-  - Statistical Graphics
-  - Exploratory Data Analysis
-  - High-Dimensional Statistics
-  - Computation and Design
+  - statistical graphics
+  - exploratory data analysis
+  - high-dimensional statistics
+  - computation and design
 name: Stuart Lee
 organizations:
 - name: Monash University

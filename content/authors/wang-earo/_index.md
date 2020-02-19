@@ -11,6 +11,9 @@ education:
 email: "earo.wang@auckland.ac.nz"
 interests:
 - time series
+- data visualisation
+- software design
+- data science
 name: Earo Wang
 organizations:
 - name: Monash University

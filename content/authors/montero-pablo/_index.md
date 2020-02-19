@@ -10,9 +10,10 @@ education:
     institution: Monash University
 email: "Pablo.MonteroManso@monash.edu"
 interests:
- - Time SeriesForecasting
- - Machine Learning
- - Computational Statistics
+ - time series
+ - forecasting
+ - machine learning
+ - computational statistics
 name: Pablo Montero Manso
 organizations:
 - name: Monash University

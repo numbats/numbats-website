@@ -6,6 +6,7 @@ education: ""
 email: "ruben.loaizamaya@monash.edu"
 interests:
 - econometrics
+- bayesian statistics
 name: Ruben Loaiza Maya
 organizations:
 - name: Monash University

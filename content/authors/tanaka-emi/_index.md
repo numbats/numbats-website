@@ -12,6 +12,7 @@ interests:
 - applied statistics
 - mixed models
 - experimental design
+- statistical computing
 name: Emi Tanaka
 organizations:
 - name: Monash University

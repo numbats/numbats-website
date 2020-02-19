@@ -6,11 +6,11 @@ bio: My research interests include distributed robotics, mobile computing and pr
 education:
   courses:
   - course: PhD in Statistics
-    institution: Stanford University
-    year: 2012
+    institution: Rutgers University
+    year: 1993
 email: ""
 interests:
-- Statistical Graphics
+- statistical graphics, exploratory data analysis, multivariate statistics, data mining
 name: Di Cook
 organizations:
 - name: Monash University

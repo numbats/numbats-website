@@ -9,7 +9,8 @@ education:
     year: 2015
 email: ""
 interests:
-- Applied Statistics
+- applied statistics
+- mathematical modeling
 name: Patricia Menendez
 organizations:
 - name: Monash University

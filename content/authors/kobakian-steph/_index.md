@@ -13,9 +13,9 @@ education:
     year: 2017
 email: "stephanie.kobakian@monash.edu"
 interests:
-- Statistical Graphics
-- Data analytics
-- Visualisation 
+- statistical graphics
+- data analytics
+- information visualisation 
 name: Stephanie Kobakian
 organizations:
 - name: Monash University
