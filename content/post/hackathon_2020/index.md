@@ -1,37 +1,22 @@
 ---
 authors:
-- admin
+- Di Cook
 categories: []
-date: "2019-02-19T00:00:00Z"
+date: "2020-02-19T00:00:00Z"
 draft: false
 featured: false
 image:
   caption: ""
   focal_point: ""
-lastMod: "2019-09-05T00:00:00Z"
+lastMod: "2020-02-19T00:00:00Z"
 projects: []
-subtitle: Learn how to blog in Academic using Jupyter notebooks
-summary: Learn how to blog in Academic using Jupyter notebooks
+subtitle: Coding together
 tags: []
 title: NUMBAT Hackathon 2020
 ---
 
-```{r}
-Image('img/hackathon/ac_icon.png')
-```
 
-
-
-
-![png](img/hackathon/numbat1.png)
-![png](img/hackathon/numbat2.png)
-![png](img/hackathon/numbat3.png)
-![png](img/hackathon/numbat4.png)
-![png](img/hackathon/numbat5.png)
-![png](img/hackathon/numbat6.png)
-![png](img/hackathon/numbat7.png)
-![png](img/hackathon/numbat8.png)
-
+<img src="/img/hackathon/ac_icon.png" />
 
 ## Overview
 
@@ -44,3 +29,15 @@ tackle a subset of these.
 
 Planned projects can be found at
 https://github.com/numbats/numbathack20/issues. 
+
+
+![png](/img/hackathon/numbat1.png)
+![png](/img/hackathon/numbat2.png)
+![png](/img/hackathon/numbat3.png)
+![png](/img/hackathon/numbat4.png)
+![png](/img/hackathon/numbat5.png)
+![png](/img/hackathon/numbat6.png)
+![png](/img/hackathon/numbat7.png)
+![png](/img/hackathon/numbat8.png)
+
+![png](/img/hackathon/abbotsford_convent.png)
