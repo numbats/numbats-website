@@ -16,15 +16,15 @@ height = ""
 # Slides.
 # Duplicate an `[[item]]` block to add more slides.
 [[item]]
-  title = "Welcome to the new NUMBAT web site"
-  content = "This group is part of the Econometrics and Business Statistics and related faculty. Our focus is on developing methods and infrastructure for data analysis. :smile:"
+  title = "The new NUMBAT web site is released"
+  content = "Welcome to the page! :smile: This hosts information about the NUMBAT activities. "
   align = "center"  # Choose `center`, `left`, or `right`.
 
   # Overlay a color or image (optional).
   #   Deactivate an option by commenting out the line, prefixing it with `#`.
-  overlay_color = "#666"  # An HTML color value.
+  #overlay_color = "#666"  # An HTML color value.
   overlay_img = "numbats_webimage.jpeg"  # Image path relative to your `static/img/` folder.
-  overlay_filter = 0.5  # Darken the image. Value in range 0-1.
+  overlay_filter = 0.1  # Darken the image. Value in range 0-1.
 
 [[item]]
   title = "Left"
