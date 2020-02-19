@@ -20,7 +20,7 @@ name: Stephanie Kobakian
 organizations:
 - name: Monash University
   url: ""
-role: Teaching Associate
+role: MPhil (Statistics)
 social:
 - icon: envelope
   icon_pack: fas
@@ -32,6 +32,8 @@ social:
   icon_pack: fab
   link: https://github.com/srkobakian
 superuser: true
+user_groups:
+- Graduate student
 ---
 
 Stephanie recently finished a Master of Philosophy focusing on Statistics. Her work presents spatial distributions using alternative visualisations.
