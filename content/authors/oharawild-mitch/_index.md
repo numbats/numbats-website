@@ -17,13 +17,10 @@ social:
   link: '#contact'
 - icon: twitter
   icon_pack: fab
-  link: https://twitter.com/statsgen
-- icon: google-scholar
-  icon_pack: ai
-  link: https://scholar.google.co.uk/citations?user=v8FN0qoAAAAJ
+  link: https://twitter.com/mitchoharawild
 - icon: github
   icon_pack: fab
-  link: https://github.com/emitanaka
+  link: https://github.com/mitchelloharawild
 superuser: true
 user_groups:
 - Current
