@@ -1,21 +1,20 @@
 ---
 authors:
 - admin
-bio: My research interests include distributed robotics, mobile computing and programmable
-  matter.
+bio: 
 education:
   courses:
   - course: PhD in Statistics
-    institution: Rutgers University
+    institution: Ohio State University
     year: 1993
-email: "dicook@monash.edu"
+email: "catherine.forbes@monash.edu"
 interests:
-- statistical graphics, exploratory data analysis, multivariate statistics, data mining
-name: Di Cook
+- bayesian time series analysis, financial econometrics
+name: Catherine Forbes
 organizations:
 - name: Monash University
   url: ""
-role: Professor of Business Analytics
+role: Associate Professor
 social:
 - icon: envelope
   icon_pack: fas
