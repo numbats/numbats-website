@@ -14,12 +14,12 @@ interests:
 name: Di Cook
 organizations:
 - name: Monash University
-  url: ""
+  url: "http://dicook.org"
 role: Professor of Business Analytics
 social:
 - icon: envelope
   icon_pack: fas
-  link: '#contact'
+  link: "mailto:dicook@monash.edu"
 - icon: twitter
   icon_pack: fab
   link: https://twitter.com/visnut
