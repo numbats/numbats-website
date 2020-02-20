@@ -1,14 +1,14 @@
 ---
 authors:
 - admin
-bio: My research interests include mixed models, experimental design and software development.
+bio: ""
 education:
   courses:
   - course: PhD in Statistics
-    institution: University of Sydney
-    year: 2015
+    institution: ETH, Zurich (Switzerland)
 email: ""
 interests:
+- statistics
 - applied statistics
 - mathematical modeling
 name: Patricia Menendez
