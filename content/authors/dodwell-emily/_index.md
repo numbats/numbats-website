@@ -11,11 +11,11 @@ email: "emily@research.att.com"
 interests:
 - interactive visualisation
 - fairness and bias in machine learning
-name: Emily Dodwell
+name: Emily Dodwell (Feb '20)
 organizations:
 - name: AT&T Labs Research
   url: ""
-role: Principal Inventive Scientist
+role: Principal Inventive Scientist, AT&T Labs Research
 social:
 - icon: envelope
   icon_pack: fas
