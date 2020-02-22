@@ -56,4 +56,19 @@ height = ""
    cta_label = "Find  out more"
    cta_url = "https://www.futurelearn.com/microcredentials/data-driven-decision-making"
 
+[[item]]
+  title = "The real numbats could use your help"
+  content = "If you would like to help with numbat conservation take a look at Project Numbat. You can buy numbat souvenirs or make donations to help with numbat conservation."
+  align = "center"
+
+  overlay_color = "#666"  # An HTML color value.
+  overlay_img = ""  # Image path relative to your `static/img/` folder.
+  overlay_filter = 0.5  # Darken the image. Value in range 0-1.
+  
+   # Call to action button (optional).
+   #   Activate the button by specifying a URL and button label below.
+   #   Deactivate by commenting out parameters, prefixing lines with `#`.
+   cta_label = "Go to Project Numbat"
+   cta_url = "http://www.numbat.org.au"
+
 +++
