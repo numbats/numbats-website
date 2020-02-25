@@ -34,7 +34,7 @@ subtitle = "Get in touch with the NUMBAT faculty members for projects not listed
   #   2 = Compact
   #   3 = Card
   #   5 = Showcase
-  view = 2
+  view = 3
 
   # For Showcase view, flip alternate rows?
   flip_alt_rows = false
