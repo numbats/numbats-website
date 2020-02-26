@@ -20,7 +20,7 @@ interests:
 name: Sherry Zhang
 organizations:
 - name: Monash University
-  url: "https://sayani.netlify.com/"
+  url: "https://huizezhangsh.netlify.com/"
 role: PhD (Statistics)
 social:
 - icon: envelope
