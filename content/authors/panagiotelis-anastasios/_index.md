@@ -9,7 +9,11 @@ education:
     year: 2009
 email: "anastasios.panagiotelis@monash.edu"
 interests:
--     Forecasting, Dependence Modelling, Bayesian Methods, Energy Markets, Macroeconomics
+- forecasting
+- dependence modelling 
+- bayesian methods
+- energy markets
+- macroeconomics
 name: Anastasios Panagiotelis
 organizations:
 - name: Monash University
