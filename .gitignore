@@ -3,7 +3,7 @@
 .RData
 .Ruserdata
 public/
-content/author/.DS_Store
-content/.DS_Store
+.DS_Store
+.DS_Store
 resources/
 
