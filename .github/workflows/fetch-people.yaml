@@ -3,7 +3,7 @@ on: [push, pull_request]
 name: fetch-people
 
 jobs:
-  R-CMD-check:
+  fetch-people:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,4 +15,5 @@ jobs:
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
       - name: Run script to fetch people
-        shell: Rscript ./R/fetch-people.R
+        run: source("./R/fetch-people.R")
+        shell: Rscript {0}
