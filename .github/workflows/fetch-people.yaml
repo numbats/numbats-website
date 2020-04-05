@@ -21,4 +21,4 @@ jobs:
         shell: Rscript {0}
         
       - name: Run script to fetch people
-        run: R ./R/fetch-people.R
+        run: R --vanilla ./R/fetch-people.R
