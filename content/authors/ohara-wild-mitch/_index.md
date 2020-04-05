@@ -1,6 +1,6 @@
 ---
 authors:
-- o'hara-wild-mitch
+- ohara-wild-mitch
 email: mail@mitchelloharawild.com
 name: Mitch O'Hara-Wild
 organizations:

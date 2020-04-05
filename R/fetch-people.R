@@ -80,7 +80,8 @@ research_interests <- function(x) {
 dat <- read_sheet("1fPfjYk2NLakqZFid12Qz_DNvuqLI5rmJWjPUpcp6g8Y")
 df <- dat %>% clean_names() %>% 
   filter(!is.na(first_name)) %>% 
-  mutate(user = tolower(glue("{last_name}-{gsub('_', '-', make_clean_names(first_name))}")),
+  mutate(user = tolower(glue("{last_name}-{gsub('_', '-', make_clean_names(first_name))}")) %>% 
+           gsub("'", "", .),
          yaml = stringr::str_replace_all(glue_data(., 
                           fence,
                           trim(minimum_template),
