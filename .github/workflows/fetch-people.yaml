@@ -13,6 +13,10 @@ jobs:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v2
+      
+      - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@master
       - name: Install dependencies
         run: |
@@ -20,9 +24,6 @@ jobs:
             "glue", "janitor", "rlang"))
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
-        
-      - name: print ls
-        run: ls -l
         
       - name: Run script to fetch people
         run: R ./R/fetch-people.R
