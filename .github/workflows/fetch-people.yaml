@@ -16,10 +16,13 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: Install dependencies
         run: |
-          install.packages(c("remotes", "rcmdcheck", "googlesheets4", "tidyverse",
+          install.packages(c("remotes", "googlesheets4", "tidyverse",
             "glue", "janitor", "rlang"))
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
         
+      - name: print ls
+        run: ls -l
+        
       - name: Run script to fetch people
-        run: Rscript ./R/fetch-people.R
+        run: R ./R/fetch-people.R
