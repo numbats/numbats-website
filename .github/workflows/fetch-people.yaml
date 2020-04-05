@@ -20,6 +20,6 @@ jobs:
             "glue", "janitor", "rlang"))
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
+        
       - name: Run script to fetch people
-        run: source("./R/fetch-people.R")
-        shell: Rscript {0}
+        run: Rscript ./R/fetch-people.R
