@@ -13,16 +13,11 @@ jobs:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v2
-      
-      - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@master
       - name: Install dependencies
         run: |
           install.packages(c("remotes", "googlesheets4", "tidyverse",
             "glue", "janitor", "rlang"))
-          remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
         
       - name: Run script to fetch people
