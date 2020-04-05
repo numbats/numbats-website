@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run: |
           install.packages(c("remotes", "googlesheets4", "tidyverse",
-            "glue", "janitor", "rlang"))
+            "glue", "janitor", "rlang", "here", "stringr"))
         shell: Rscript {0}
         
       - name: Run script to fetch people
