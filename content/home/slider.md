@@ -17,7 +17,7 @@ height = ""
 # Duplicate an `[[item]]` block to add more slides.
 [[item]]
   title = "Welcome to Lauren Kennedy and Ruben Loaiza Maya"
-  content = "Welcome! :smile: Two new lecturers started this July, Lauren and Ruben. Both are Bayesian experts, among many other skills."
+  content = "Welcome! :smile: Lauren and Ruben started as new lecturers this July. Both are Bayesian experts, among many other skills."
   align = "center"  # Choose `center`, `left`, or `right`.
 
   # Overlay a color or image (optional).
