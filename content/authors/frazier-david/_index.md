@@ -19,7 +19,7 @@ social:
 - icon: envelope
   icon_pack: fas
   link: "mailto:david.frazier@monash.edu"
- interests:
+interests:
  - simulation-based inference
  - Bayesian computation 
 user_groups:
