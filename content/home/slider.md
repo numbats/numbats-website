@@ -16,8 +16,9 @@ height = ""
 # Slides.
 # Duplicate an `[[item]]` block to add more slides.
 [[item]]
-  title = "The new NUMBAT web site is released"
-  content = "Welcome! :smile: This site will host information about the NUMBAT activities. "
+  title = "Welcome to Lauren Kennedy and Ruben Loaiza Maya"
+  content = "Welcome! :smile: Two new NUMBATs started this July, Lauren and Ruben. Both are Bayesian experts, among many other
+ skills. "
   align = "center"  # Choose `center`, `left`, or `right`.
 
   # Overlay a color or image (optional).
