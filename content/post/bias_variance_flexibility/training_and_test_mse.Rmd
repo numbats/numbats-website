@@ -137,7 +137,7 @@ When changing the flexibility of a model, the test error distribution will go th
 ###	Phase 1: Decreasing Bias in Model  
 When our model is biased, we are forcing our data into constraints that don’t reflect the true relationship between the variables.  Since we have not captured the true relationship of the parameters, any sample drawn from our population will also have a more complicated relationship than that of our model, and have error from bias. This relationship is illustrated below, where our high error is largely the result of too much bias in the model. Both distributions are similar to each other, but far from zero.
 <center>
-![](phase1.png)
+![png](https://numbat.space/post/bias_variance_flexibility/img/bias_variance_flexibility/phase1.png)
 </center>
 
 ### Phase 2: Optimal Fit  
