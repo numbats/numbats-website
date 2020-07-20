@@ -137,20 +137,20 @@ When changing the flexibility of a model, the test error distribution will go th
 ###	Phase 1: Decreasing Bias in Model  
 When our model is biased, we are forcing our data into constraints that don’t reflect the true relationship between the variables.  Since we have not captured the true relationship of the parameters, any sample drawn from our population will also have a more complicated relationship than that of our model, and have error from bias. This relationship is illustrated below, where our high error is largely the result of too much bias in the model. Both distributions are similar to each other, but far from zero.
 <center>
-![png](https://numbat.space/post/bias_variance_flexibility/img/bias_variance_flexibility/phase1.png)
+![png](https://numbat.space/img/bias_variance_flexibility/phase1.png)
 </center>
 
 ### Phase 2: Optimal Fit  
 Increasing the flexibility will reduce the bias which will decrease the error. The optimal error will have smaller error for both training and test, but they will both be pretty similar. If you have captured the true relationship of the data with your model (if there is one), the distributions should perfectly overlap. This is unlikely to happen, since your model will always have a bias towards any quirks in your training set, and thus perform better on that set most of the time. So we instead will interpret the optimal fit is when the test error reaches its minimum (before the variance causes the total error to start to increase). 
 <center>
-![](phase2.png)
+![png](https://numbat.space/img/bias_variance_flexibility/phase2.png)
 </center>
 
 ### Phase 3:	Increasing Variance in Model  
 As we start to overfit our model, we introduce more error from variance than we are losing from decreasing bias. This has two effects on the distribution of the estimated test error. First, it causes the distribution to shift upwards as we have once again missed the true relationship in the population. This miss is different from bias however, as we have overfit our model to the specifics of the test set sample, thus new samples drawn from the same population will not have a similar error. This causes the distributions to shift away from each other. Additionally, the variance of the test error estimate will also increase. Overfitting means a higher penalty for samples that just happen to be different  from our training set, and a higher reward for those that just happen to have similar quirks. Ultimately that makes the estimates more unreliable, and thus have a higher variance.   
 
 <center>
-![](phase3.png)
+![png](https://numbat.space/img/bias_variance_flexibility/phase3.png)
 </center>
 
   
@@ -184,14 +184,14 @@ plot <- ggplot(anim_df, aes(x= mse, colour=type))+
 anim_save("figure4.gif", plot)
 ```
 <center>
-![](figure4.gif)
+![png](https://numbat.space/img/bias_variance_flexibility/figure4.gif)
 </center>
 
 ## Sample to Sample Changes
 Here it is important to highlight the difference between a population and a sample, so we can better understand how an unfortunate test and training split can hurt error estimates. A population is all the data on what you are trying to make an inference on. For example, if I want to make an inference on the true relationship between mpg and horsepower, the Auto data is a sample of that. Generally we would be interested to make statements for mgp and horsepower for all possible cars, where all possible cars would be our population. If I want to make an inference on the relationship between mpg and horsepower *in the Auto dataset* (which is a weirdly specific realm to keep your inferences to but each to his own I guess) then this data is the population sample. For our sample to be representative, it needs to both be randomly drawn, and large enough.  Unfortunately, even when we draw our samples to be decently large in size, and random, we will still occasionally get some unrepresentative splits. A sample that is unlike the population will bring the validity of any inference we try to make using that sample (including predictive models) into disrepute. Below is an illustration on how the sample will influence the fit among other interpretations. 
 
 <center>
-![](figure5popandsamp.png)
+![png](https://numbat.space/img/bias_variance_flexibility/figure5popandsamp.png)
 </center>
 
 
@@ -260,7 +260,7 @@ anim_save("figure7.gif", plot2)
 
 ```
 <center>
-![](figure7.gif)
+![png](https://numbat.space/img/bias_variance_flexibility/figure7.gif)
 </center>
   
 Here we can see the bias variance trade off play out with our estimates of test error, just as they would with our model fit. Our cross-validation methods in order of increasing variance are:  
