@@ -18,21 +18,21 @@ output:
 <h3>Phase 1: Decreasing Bias in Model</h3>
 When our model is biased, we are forcing our data into constraints that don’t reflect the true relationship between the variables. Since we have not captured the true relationship of the parameters, any sample drawn from our population will also have a more complicated relationship than that of our model, and have error from bias. This relationship is illustrated below, where our high error is largely the result of too much bias in the model. Both distributions are similar to each other, but far from zero.
 <center>
-<img src="phase1.png" />
+<img src="/img/bias_variance_flexibility/phase1.png" title="fig:" alt="png" />
 </center>
 </div>
 <div id="phase-2-optimal-fit" class="section level3">
 <h3>Phase 2: Optimal Fit</h3>
 Increasing the flexibility will reduce the bias which will decrease the error. The optimal error will have smaller error for both training and test, but they will both be pretty similar. If you have captured the true relationship of the data with your model (if there is one), the distributions should perfectly overlap. This is unlikely to happen, since your model will always have a bias towards any quirks in your training set, and thus perform better on that set most of the time. So we instead will interpret the optimal fit is when the test error reaches its minimum (before the variance causes the total error to start to increase).
 <center>
-<img src="phase2.png" />
+<img src="/img/bias_variance_flexibility/phase2.png" title="fig:" alt="png" />
 </center>
 </div>
 <div id="phase-3-increasing-variance-in-model" class="section level3">
 <h3>Phase 3: Increasing Variance in Model</h3>
 <p>As we start to overfit our model, we introduce more error from variance than we are losing from decreasing bias. This has two effects on the distribution of the estimated test error. First, it causes the distribution to shift upwards as we have once again missed the true relationship in the population. This miss is different from bias however, as we have overfit our model to the specifics of the test set sample, thus new samples drawn from the same population will not have a similar error. This causes the distributions to shift away from each other. Additionally, the variance of the test error estimate will also increase. Overfitting means a higher penalty for samples that just happen to be different from our training set, and a higher reward for those that just happen to have similar quirks. Ultimately that makes the estimates more unreliable, and thus have a higher variance.</p>
 <center>
-<img src="phase3.png" />
+<img src="/img/bias_variance_flexibility/phase3.png" title="fig:" alt="png" />
 </center>
 </div>
 <div id="understanding-with-an-example" class="section level3">
@@ -41,7 +41,7 @@ Increasing the flexibility will reduce the bias which will decrease the error. T
 <p><img src="/post/bias_variance_flexibility/training_and_test_mse_files/figure-html/Figure%203-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>We can see the effect on the distributions using the animated density plot below. Here we have taken 100 different samples, and fit a model that predicts mpg using a polynomial degree of 1 to 15 of horsepower. Here we can see the above hand drawn illustration and interpretation of the variable relationship play out. Initially, increasing the flexibility of our model eliminates bias and causes both distributions to shift down. At polynomial degree 4, they stop at the minimum, and then for polynomial degrees higher than that, variance is introduced, and the test error increases in both expected value and variance.</p>
 <center>
-<img src="figure4.gif" />
+<img src="/img/bias_variance_flexibility/figure4.gif" title="fig:" alt="png" />
 </center>
 </div>
 </div>
@@ -49,7 +49,7 @@ Increasing the flexibility will reduce the bias which will decrease the error. T
 <h2>Sample to Sample Changes</h2>
 <p>Here it is important to highlight the difference between a population and a sample, so we can better understand how an unfortunate test and training split can hurt error estimates. A population is all the data on what you are trying to make an inference on. For example, if I want to make an inference on the true relationship between mpg and horsepower, the Auto data is a sample of that. Generally we would be interested to make statements for mgp and horsepower for all possible cars, where all possible cars would be our population. If I want to make an inference on the relationship between mpg and horsepower <em>in the Auto dataset</em> (which is a weirdly specific realm to keep your inferences to but each to his own I guess) then this data is the population sample. For our sample to be representative, it needs to both be randomly drawn, and large enough. Unfortunately, even when we draw our samples to be decently large in size, and random, we will still occasionally get some unrepresentative splits. A sample that is unlike the population will bring the validity of any inference we try to make using that sample (including predictive models) into disrepute. Below is an illustration on how the sample will influence the fit among other interpretations.</p>
 <center>
-<img src="figure5popandsamp.png" />
+<img src="/img/bias_variance_flexibility/figure5popandsamp.png" title="fig:" alt="png" />
 </center>
 <p>That being said, it’s highly unlikely to get a difference that dramatic in an actual sample. In reality, minor, almost invisible to the eye differences in your sample will create large differences in your MSE estimates.</p>
 <div id="an-example-of-sample-influence-on-error" class="section level3">
@@ -65,7 +65,7 @@ Increasing the flexibility will reduce the bias which will decrease the error. T
 <h3>The Phases Example Using Cross Validation</h3>
 <p>When we originally looked at the test error, it was estimated with the validation set approach (test in the plot) for simplicity. Now, let’s redo those distribution estimations of error from the mpg and horsepower models, but also look at the distribution of the 10-fold (k10cv), and 5-fold cross (k5cv) validation methods.</p>
 <center>
-<img src="figure7.gif" />
+<img src="/img/bias_variance_flexibility/figure7.gif" title="fig:" alt="png" />
 </center>
 <p>Here we can see the bias variance trade off play out with our estimates of test error, just as they would with our model fit. Our cross-validation methods in order of increasing variance are:<br />
 <span class="math display">\[5-fold CV &lt; 10-fold CV &lt; Validation Set Method\]</span></p>
