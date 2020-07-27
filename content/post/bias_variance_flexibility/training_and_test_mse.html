@@ -3,6 +3,9 @@ title: "A Deep Dive into How Flexibility Affects The Bias and Variance Trade Off
 authors: 
   - Harriet Mason
 date: "2020-07-20"
+output:
+  blogdown::html_page:
+    math: true
 categories:
   - data visualisation
   - statistics
@@ -80,10 +83,14 @@ Increasing the flexibility will reduce the bias which will decrease the error. T
 <center>
 <img src="/img/bias_variance_flexibility/figure7.gif" title="fig:" alt="png" />
 </center>
-<p>Here we can see the bias variance trade off play out with our estimates of test error, just as they would with our model fit. Our cross-validation methods in order of increasing variance are:<br />
-<span class="math display">\[5-fold CV &lt; 10-fold CV &lt; Validation Set Method\]</span></p>
-<p>The methods in order of increasing bias are:
-<span class="math display">\[10-fold CV  &lt; 5-fold CV &lt; Validation Set Method\]</span></p>
+<p>Here we can see the bias variance trade off play out with our estimates of test error, just as they would with our model fit. Our cross-validation methods in order of increasing variance are:</p>
+<blockquote>
+<p>5-fold CV &lt; 10-fold CV &lt; Validation Set Method</p>
+</blockquote>
+<p>The methods in order of increasing bias are:</p>
+<blockquote>
+<p>10-fold CV &lt; 5-fold CV &lt; Validation Set Method</p>
+</blockquote>
 <p>In general, the k-fold CV bias and variance depends on the value of k, where LOOCV (k=n) is approximately unbiased.</p>
 </div>
 </div>
