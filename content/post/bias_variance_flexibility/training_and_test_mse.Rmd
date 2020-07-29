@@ -117,7 +117,7 @@ df <- the_mse(100,15,0.5)
 ```
 When we are building a machine learning model you have a choice of a simple, which would be an inflexible, model vs a complicated, or very flexible model. We need to decide how flexible the model should be to work well for future samples. An inflexible model may not reflect a complex underlying process adequately and hence would be biased. A flexible model has the capacity to capture a complex underlying process but the fitted version might change from one sample to another enormously, which is called variance. This difference is illustrated in the figure below.
 
-![png](/img/bias_variance_flexibility/biasandvariance_sketch.png)
+![](/img/bias_variance_flexibility/biasandvariance_sketch.png)
 
 When we think of how the bias and variance change with flexibility, we typically only look at its behaviour on average. In the plot below, the left side corresponds to an inflexible model and the right side corresponds to a flexible model. We can see that the test error stay slightly above the training as flexibility increases, until the text error shoots up. Visualisations like this are shown frequently in the textbook *"An Introduction to Statistical Learning with Applications in R" by Gareth James, Daniela Witten, Trevor Hastie and Robert Tibshirani*, which largely inspired this blog post. While this explains the behaviour of our test error on average, it doesn’t give a complete understanding of how our test error estimate will act within any individual sample. This is where we find the benefit of understanding the error distribution. The distribution of the test error allows us to not only understand the average behaviour, but also how that behaviour may change from sample to sample.
   
