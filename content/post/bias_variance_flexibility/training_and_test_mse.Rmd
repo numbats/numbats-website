@@ -292,4 +292,4 @@ In general, the k-fold CV bias and variance depends on the value of k, where LOO
 ## To Summarise...
 As the flexibility of our model increases, we know that the estimated model will have a decrease in bias and increase in variance. This change in our model causes both a change in the mean and variance of our estimated test error. A lot of the difference is caused by the increasing impact of our random sample split, however it is not something that is visually noticeable. Like the model, the method of test error estimation also has its own bias and variance trade off, and it can be balanced using cross validation methods.
 
-
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.

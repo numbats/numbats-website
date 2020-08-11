@@ -97,3 +97,4 @@ If we repeat this 100 times, we get 100 medians, which we can sort in ascending 
 ### A Final Note
 In the end, bootstrapping is a useful and versatile tool, that can help us when we are using less conventional statistics or have an unconventional distribution. Unlike simulation, bootstrapping isn't generating new data, but rather creating a new simulation from our current data, so the conclusions we can draw aren't limitless. One place it could be useful, however, is saving the people around me from my moments of stupidity that drag them down to my nearly illiterate level.
 
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
