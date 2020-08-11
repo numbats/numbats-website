@@ -22,16 +22,17 @@ tags:
 ## A Conspiracy Theory is Like a Bad Model
 A few years ago my mum became very susceptible to suggestion, and made friends with a guy who was really good at speaking about nonsense with the authority to make it sound true. Listening to him sent her down a conspiracy theory rabbit hole, of which I had to experience second hand. Our interactions ended up boiling down to mum sending me a 20 minutes Youtube video about aliens building the pyramids, then I would wait the appropriate amount of time and send a text that said "Wow, what an interesting perspective". I always hoped it would end the conversation and we could talk about something else, but instead it tended to inspire a paragraph long text rant about how the government was hiding free energy from us, and an 11 year old Texan genius had discovered the plot. When I think of flexible methods, I often have flash backs to that period of my life. Not because high degree polynomials were built by ancient aliens or an 11 year old genius but because we can use the pitfalls of conspiracy theories to understand the difference between flexible and inflexible methods.
 
-<centre>
-![](/img/FlexiblevsInflexible/firetruck.jpeg)
-<centre>
-
 ### What Is Flexibility.
 I think of flexibility as the trade off in capturing the "local" and "global" trends in our data. An inflexible model will capture the global trend of the data, but any relationship between our variables is lost. If we instead choose a flexible model, we are focusing on the local trends and giving our model a better chance at capturing variable relationships, at risk to overfit to the sample. Flexibility has key interactions with 4 other elements of our model: the sample size, dimensionality, assumptions about the function, and irreducible error.
 
 
 ## 1: Outrageous Claims Need Outrageous Evidence
 My mother is a "bit eccentric" to put it mildly. In the last few months, to only name a few things, she has bought a fire truck to start mud-crabbing (pictured below), bought some goats because the garden is a pain to manage, and turned the pool into a "fish Club Med" where she collects wildlife from the local creek and feeds them McDonalds for breakfast. From expulsions to arrest warrants, to the man she drank goon with at the beach who now lives in our house, the stories are endless. Despite this, never in my life had I ever been called a liar for telling them (the first time was at university orientation). People at my school had grown used to it, they had met my family and heard years worth of stories so I had a wealth of evidence to normalise my claims. Strangers didn't have that, and so they didn't believe my outrageous (completely true) claims. Similarly in statistics, if we want a complicated model we will need a large sample size to back it up.
+
+
+<centre>
+![](/img/FlexiblevsInflexible/firetruck.jpeg)
+<centre>
 
 
 ### Why Flexible Models Need a Bigger Sample
