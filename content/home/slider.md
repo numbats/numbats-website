@@ -41,7 +41,7 @@ height = ""
   title = "Welcome! To our new lecturers!"
   content = " :smile: Lauren Kennedy and Ruben Loaiza Maya."
   align = "center"  # Choose `center`, `left`, or `right`.
-  active = false 
+  
   # Overlay a color or image (optional).
   #   Deactivate an option by commenting out the line, prefixing it with `#`.
   # overlay_color = "#666"  # An HTML color value.
