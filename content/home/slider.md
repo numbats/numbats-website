@@ -16,6 +16,17 @@ height = ""
 # Slides.
 # Duplicate an `[[item]]` block to add more slides.
 [[item]]
+  title = "Congratulations to Dr Ursula Laa!"
+  content = ":mortar_board: Taking a new lecturer position at the University of Natural Resources and Life Sciences, Vienna Austria"
+  align = "center"  # Choose `center`, `left`, or `right`.
+
+  # Overlay a color or image (optional).
+  #   Deactivate an option by commenting out the line, prefixing it with `#`.
+  # overlay_color = "#666"  # An HTML color value.
+  overlay_img = "numbats_webimage.jpeg"  # Image path relative to your `static/img/` folder.
+  overlay_filter = 0.5  # Darken the image. Value in range 0-1.
+
+[[item]]
   title = "Congratulations to Steff Kobakian!"
   content = ":mortar_board: Master of Philosophy"
   align = "center"  # Choose `center`, `left`, or `right`.
@@ -30,7 +41,7 @@ height = ""
   title = "Welcome! To our new lecturers!"
   content = " :smile: Lauren Kennedy and Ruben Loaiza Maya."
   align = "center"  # Choose `center`, `left`, or `right`.
-
+  active = false 
   # Overlay a color or image (optional).
   #   Deactivate an option by commenting out the line, prefixing it with `#`.
   # overlay_color = "#666"  # An HTML color value.
