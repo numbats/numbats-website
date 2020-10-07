@@ -20,6 +20,7 @@ tags:
 
 
 
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" ></script>
 <div id="is-the-problem-the-parents-or-the-kid" class="section level1">
 <h1>Is The Problem The Parents or the Kid?</h1>
 <p>As a child, your parents are seen as deities that can do no wrong, that is until you are doing a first aid course 10 years later and learn that a broken arm is not an “I’ll take you to the hospital tomorrow if it still hurts” level emergency. Growing up I started to realise my Dad’s life lessons were somewhat unorthodox and below are some of my favourite quotes.</p>
@@ -92,8 +93,8 @@ tags:
 <p>Wow what a beautiful joint PDF… What do we do with it? Well I said in the beginning that the function that gives probability of outcomes and the function that gives probability of parameters is the same function just with a different unknown. Here are the two directions we could take with our joint PMF.
 <img src="/img/MLE/draw14.png" /></p>
 <p>Sine in this case our unknown is the parameter, we are going to use the likelihood function. Here we can actually put find the Likelihood function for our particular birthday party results.</p>
-<p><span class="math display">\[L(\theta)= \theta^{18}(1-\theta)^{6}\]</span>
-But to simplify it here with the outcomes wouldn’t be an accurate representation of how we usually have to conduct MLE. So I’m going to leave in the product notation. Now that we have a function that shows how likely different values of theta (the probability a student turns up) are, we need to find its maximum.</p>
+<p><span class="math display">\[L(\theta)= \theta^{18}(1-\theta)^{6}\]</span></p>
+<p>But to simplify it here with the outcomes wouldn’t be an accurate representation of how we usually have to conduct MLE. So I’m going to leave in the product notation. Now that we have a function that shows how likely different values of theta (the probability a student turns up) are, we need to find its maximum.</p>
 </div>
 <div id="step-3-math-time-logs-and-derivatives-and-more-derivatives" class="section level2">
 <h2>Step 3: Math Time : Logs and Derivatives and More Derivatives</h2>
@@ -101,22 +102,22 @@ But to simplify it here with the outcomes wouldn’t be an accurate representati
 <div id="why-take-the-log" class="section level3">
 <h3>Why take the log?</h3>
 <p>The answer is really just mathematicians are lazy. From high school you may remember that when you want to find the maximum of a function you take the derivative and set it equal to 0. The thing is, we have a massive product right now, and the product rule is a pain to do. Especially when we have 24 functions multiplied together. Thanks to log laws, taking the log of this nightmare function both doesn’t change the value the maximum is at (thanks to some math stuff I won’t go into) and also means we have to take the derivative of a big sum instead of a big product, which is really easy.</p>
-<p><span class="math display">\[L(\theta)= \prod^{24}_{i=1}\theta^{x_i}(1-\theta)^{1-x_i}\]</span>
-I’m going to do some cosmetic changes before applying the log.
-<span class="math display">\[L(\theta)= \theta^{\sum_{i=1}^{24} x_i}(1-\theta)^{24-\sum_{i=1}^{24} x_i}\]</span>
-Then we have our log-likelihood.
-<span class="math display">\[logL(\theta)= log(\theta)\sum_{i=1}^{24} x_i + (24-\sum_{i=1}^{24} x_i)log(1-\theta)\]</span></p>
+<p><span class="math display">\[L(\theta)= \prod^{24}_{i=1}\theta^{x_i}(1-\theta)^{1-x_i}\]</span></p>
+<p>I’m going to do some cosmetic changes before applying the log.</p>
+<p><span class="math display">\[L(\theta)= \theta^{\sum_{i=1}^{24} x_i}(1-\theta)^{24-\sum_{i=1}^{24} x_i}\]</span>
+Then we have our log-likelihood.</p>
+<p><span class="math display">\[logL(\theta)= log(\theta)\sum_{i=1}^{24} x_i + (24-\sum_{i=1}^{24} x_i)log(1-\theta)\]</span></p>
 </div>
 <div id="the-first-derivative" class="section level3">
 <h3>The first derivative</h3>
-<p>Now we take the first derivative. When our likelihood function has a rate of change of 0, it’s about to fall back down. So we take the derivative with respect to the value we want to maximise and find the parameter that is the most likely given our set of outcomes.
-<span class="math display">\[logL&#39;(\theta) = \frac1\theta {\sum_{i=1}^{24} x_i}- \frac1{1-\theta}(24-\sum_{i=1}^{24} x_i)\]</span>
-Since the first order condition is that we <em>would like</em> the first derivative to be equal to 0, this is where I put the hat in because this isn’t true in general, only for our estimate.
-<span class="math display">\[\frac1{\hat{\theta}} {\sum_{i=1}^{24} x_i}- \frac1{1-\hat{\theta}}(24-\sum_{i=1}^{24} x_i)=0\]</span>
-Which we solve to find
-<span class="math display">\[{\hat{\theta}} = \frac1{24}\sum_{i=1}^{24} x_i  \]</span>
-Now that we have the solutions we can substitute in our values from our sample of party go-ers and get the probability any one person will turn up.
-<span class="math display">\[{\hat{\theta}} = 0.75\]</span></p>
+<p>Now we take the first derivative. When our likelihood function has a rate of change of 0, it’s about to fall back down. So we take the derivative with respect to the value we want to maximise and find the parameter that is the most likely given our set of outcomes.</p>
+<p><span class="math display">\[logL&#39;(\theta) = \frac1\theta {\sum_{i=1}^{24} x_i}- \frac1{1-\theta}(24-\sum_{i=1}^{24} x_i)\]</span></p>
+<p>Since the first order condition is that we <em>would like</em> the first derivative to be equal to 0, this is where I put the hat in because this isn’t true in general, only for our estimate.</p>
+<p><span class="math display">\[\frac1{\hat{\theta}} {\sum_{i=1}^{24} x_i}- \frac1{1-\hat{\theta}}(24-\sum_{i=1}^{24} x_i)=0\]</span></p>
+<p>Which we solve to find</p>
+<p><span class="math display">\[{\hat{\theta}} = \frac1{24}\sum_{i=1}^{24} x_i\]</span></p>
+<p>Now that we have the solutions we can substitute in our values from our sample of party go-ers and get the probability any one person will turn up.</p>
+<p><span class="math display">\[{\hat{\theta}} = 0.75\]</span></p>
 </div>
 <div id="the-second-derivative" class="section level3">
 <h3>The second derivative</h3>
