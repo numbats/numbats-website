@@ -17,6 +17,6 @@ Some of the units in the MBAt are:
 - [ETC5510 Introduction to data analysis](https://mida.numbat.space)
 - [ETC5512 Wild-caught data](https://wcd.numbat.space)
 - [ETC5521 Exploratory data analysis](https://eda.numbat.space)
-- [ETC5523 Commuunicating with data](https://wcd.numbat.space)
+- [ETC5523 Communicating with data](https://cwd.numbat.space)
 
 A full list of topics for the program can be seen [here](https://docs.google.com/document/d/1gfQhTXdZmO2EYl_a-v7ySilBjXM9bO00da7yTE6ZP_s/edit#heading=h.jd2um1n5bbn6)
