@@ -16,8 +16,8 @@ height = ""
 # Slides.
 # Duplicate an `[[item]]` block to add more slides.
 [[item]]
-  title = "Congratulations to Dr Ursula Laa!"
-  content = ":mortar_board: Taking a new lecturer position at the University of Natural Resources and Life Sciences, Vienna Austria"
+  title = "Congratulations to Dr Ursula Laa and to Dr Pablo Montero Manso!"
+  content = ":mortar_board: Taking new lecturer positions at the University of Natural Resources and Life Sciences, Vienna Austria, and the University of Sydney, respectively."
   align = "center"  # Choose `center`, `left`, or `right`.
 
   # Overlay a color or image (optional).
