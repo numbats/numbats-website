@@ -18,5 +18,5 @@ interests:
 - macroeconomics
 user_groups:
 - Faculty
-- Current
+- Alumni
 ---

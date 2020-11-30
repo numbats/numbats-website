@@ -4,8 +4,8 @@ authors:
 email: NA
 name: Puwasala Gamakumara
 organizations:
-- name: Walmart, Australia
-role: Data Science Intern
+- name: Monash University
+role: Post Doctoral Researcher (Statistics)
 social:
 interests:
 - time series
@@ -13,5 +13,6 @@ interests:
 - data science
 - applied statistics
 user_groups:
-- Alumni
+- Postdoc
+- Current
 ---
