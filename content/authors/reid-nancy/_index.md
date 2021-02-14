@@ -26,6 +26,6 @@ social:
   link: https://twitter.com/reid_nancy
 superuser: true
 user_groups:
-- Visitors
+- Alumni
 ---
 

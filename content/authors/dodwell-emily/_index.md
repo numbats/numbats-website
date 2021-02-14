@@ -28,6 +28,6 @@ social:
   link: https://github.com/emdodwell
 superuser: true
 user_groups:
-- Visitors
+- Alumni
 ---
 

@@ -1,11 +1,11 @@
 ---
 authors:
 - lee-stuart
-email: stuart.lee1@monash.edu
+email: stuart.a.lee@monash.edu
 name: Stuart Lee
 organizations:
 - name: Monash University
-role: PhD (Statistics)
+role: Postdoctoral Researcher (Statistics)
 social:
 - icon: link
   icon_pack: fas
@@ -18,13 +18,13 @@ social:
   link: https://github.com/sa-lee
 - icon: envelope
   icon_pack: fas
-  link: "mailto:stuart.lee1@monash.edu"
+  link: "mailto:stuart.a.lee@monash.edu"
 interests:
 - statistical graphics
 - exploratory data analysis
 - high-dimensional statistics
 - computation and design
 user_groups:
-- PhD Student
+- Postdoc
 - Current
 ---

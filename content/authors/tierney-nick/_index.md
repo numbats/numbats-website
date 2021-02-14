@@ -4,8 +4,8 @@ authors:
 email: Nicholas.Tierney@monash.edu
 name: Nick Tierney
 organizations:
-- name: Monash University
-role: Lecturer in Statistics
+- name: Telethon Kids Institute
+role: Research Software Engineer
 social:
 - icon: link
   icon_pack: fas
@@ -25,6 +25,5 @@ interests:
 - bayesian statistics
 - software design
 user_groups:
-- Faculty
-- Current
+- Alumni
 ---
