@@ -4,8 +4,8 @@ authors:
 email: Ursula.Laa@monash.edu
 name: Ursula Laa
 organizations:
-- name: Monash University
-role: Post Doctoral Researcher (Statistics)
+- name: University of Natural Resources and Life Sciences (BOKU) 
+role: Lecturer (Statistics)
 social:
 - icon: link
   icon_pack: fas
@@ -15,13 +15,12 @@ social:
   link: https://twitter.com/@UschiLaa
 - icon: envelope
   icon_pack: fas
-  link: "mailto:Ursula.Laa@monash.edu"
+  link: "mailto:ursula.laa@boku.ac.at"
 interests:
 - statistical graphics
 - high-dimensional data
 - machine learning
 - (particle) physics
 user_groups:
-- Postdoc
-- Current
+- Alumni
 ---

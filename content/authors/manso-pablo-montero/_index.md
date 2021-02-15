@@ -16,6 +16,5 @@ interests:
 - machine learning
 - computational statistics
 user_groups:
-- Postdoc
-- Current
+- Alumni
 ---

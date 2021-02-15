@@ -16,6 +16,5 @@ interests:
 - time series analysis
 - forecasting
 user_groups:
-- PhD Student
-- Current
+- Alumni
 ---
