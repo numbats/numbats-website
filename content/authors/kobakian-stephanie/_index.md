@@ -4,8 +4,8 @@ authors:
 email: stephanie.kobakian@monash.edu
 name: Stephanie Kobakian
 organizations:
-- name: QUT
-role: MPhil (Statistics)
+- name: PWC
+role: Data scientist
 social:
 - icon: twitter
   icon_pack: fab
@@ -21,6 +21,5 @@ interests:
 - data analytics
 - information visualisation
 user_groups:
-- Master Student
-- Current
+- Alumni
 ---
