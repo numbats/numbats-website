@@ -16,17 +16,6 @@ height = ""
 # Slides.
 # Duplicate an `[[item]]` block to add more slides.
 [[item]]
-  title = "Congratulations to Dr Stuart Lee!"
-  content = ":mortar_board: PhD"
-  align = "center"  # Choose `center`, `left`, or `right`.
-
-  # Overlay a color or image (optional).
-  #   Deactivate an option by commenting out the line, prefixing it with `#`.
-  # overlay_color = "#666"  # An HTML color value.
-  overlay_img = "numbats_webimage.jpeg"  # Image path relative to your `static/img/` folder.
-  overlay_filter = 0.5  # Darken the image. Value in range 0-1.
-
-[[item]]
   title = "Welcome! To our new professor!"
   content = " :smile: [Dan Simpson](https://dpsimpson.github.io) begins in May 2021. Also, keep an eye out for two new junior positions coming soon!"
   align = "center"  # Choose `center`, `left`, or `right`.
