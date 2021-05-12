@@ -16,8 +16,8 @@ height = ""
 # Slides.
 # Duplicate an `[[item]]` block to add more slides.
 [[item]]
-  title = "Welcome! To our new professor!"
-  content = " :smile: [Dan Simpson](https://dpsimpson.github.io) begins in May 2021. Also, keep an eye out for two new junior positions coming soon!"
+  title = "Welcome to our new professor, new PhD and Honours students!"
+  content = " :smile: [Dan Simpson](https://dpsimpson.github.io) just started May 2021. [Patrick Li](http://github.com/TengMCing) started a PhD and [Harriet Mason](https://github.com/harriet-mason) is working on Honours research!"
   align = "center"  # Choose `center`, `left`, or `right`.
   
   # Overlay a color or image (optional).
