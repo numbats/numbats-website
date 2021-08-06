@@ -38,7 +38,7 @@ library(tidytext)
 library(sf)
 library(unglue)
 library(MASS)
-library(xkcd)
+#library(xkcd)
 library(gridExtra)
 ```
 
@@ -183,7 +183,7 @@ Right now, I'm not going to use both of these sentiments. We are still in the on
 ggplot(sum_review, aes(x=afinn_sentiment, colour=liked)) +
   geom_rug(alpha=0.7) +
   geom_density() +
-  theme_xkcd() +
+  ##theme_xkcd() +
   #theme(text=element_text(family="Harrietshandwriting")) +
   xlab("AFINN Sentiment") +
   ggtitle("Density of Average AFINN Sentiment for Food Reviews")+
@@ -214,7 +214,7 @@ ggplot(lda_1dim, aes(x=LD1, colour=liked))+
   geom_rug(alpha=0.7) +
   geom_density() + 
   geom_vline(xintercept=0, linetype=2)+
-  theme_xkcd() +
+  #theme_xkcd() +
   #theme(text=element_text(family="Harrietshandwriting"))+
   ggtitle("Density of LD1 for Food Reviews Data")+
   scale_colour_brewer(palette="Dark2")
@@ -320,7 +320,7 @@ pca_scatter <- ggplot(pca_anim, aes(x=X1, y=X2)) +
   transition_states(anglex, 1, 5)+
   ggtitle('Scatter Plot of Data with 1-Dimensional Projection',
           subtitle = 'Frame {frame} of {nframes}')+
-  theme_xkcd() +
+  #theme_xkcd() +
   #theme(text=element_text(family="Harrietshandwriting"))+
   scale_colour_brewer(palette="Dark2")
 anim_save("draw/pca_scatter.gif", pca_scatter)
@@ -332,7 +332,7 @@ pca_density <- ggplot(pca_anim, aes(x=projval2, colour=group))+
   transition_states(anglex, 1, 5) +
   ggtitle("Density Plot of 1-Dimensional Projection",
           subtitle = 'Frame {frame} of {nframes}') +
-  theme_xkcd() +
+  #theme_xkcd() +
   #theme(text=element_text(family="Harrietshandwriting"))+
   xlab("Projection Value")+
   theme(legend.position = "none")+
@@ -389,7 +389,7 @@ nocorr_scatter <- ggplot(nocorr_anim, aes(x=X1, y=X2)) +
   geom_label(aes(x=-3.5, y=4,label=paste("VarDist:",VarDist))) +
   ggtitle('"No Correlation Data" with 1-Dimensional Projections',
           subtitle = 'Frame {frame} of {nframes}')+
-  theme_xkcd() +
+  #theme_xkcd() +
   #theme(text=element_text(family="Harrietshandwriting"))+
   scale_colour_brewer(palette="Dark2")
 anim_save("draw/nocorr_scatter.gif", nocorr_scatter)
@@ -401,7 +401,7 @@ nocorr_density <- ggplot(nocorr_anim, aes(x=projval2, colour=group))+
   transition_states(anglex, 1, 5)+
   ggtitle("Density Plot of 1-Dimensional Projection",
           subtitle = 'Frame {frame} of {nframes}')+
-  theme_xkcd() +
+  #theme_xkcd() +
   #theme(text=element_text(family="Harrietshandwriting"))+
   xlab("Projection Value")+
   scale_colour_brewer(palette="Dark2")
@@ -443,7 +443,7 @@ poscorr_scatter <- ggplot(poscorr_anim, aes(x=X1, y=X2)) +
   transition_states(anglex, 1, 5)+
   ggtitle('Positively Correlated Data with 1-Dimensional Projection',
           subtitle = 'Frame {frame} of {nframes}')+
-  theme_xkcd() +
+  #theme_xkcd() +
   #theme(text=element_text(family="Harrietshandwriting"))+
   scale_colour_brewer(palette="Dark2")
 anim_save("draw/poscorr_scatter.gif", poscorr_scatter)
@@ -455,7 +455,7 @@ poscorr_density <- ggplot(poscorr_anim, aes(x=projval2, colour=group))+
   transition_states(anglex, 1, 5)+
   ggtitle("Density Plot of 1-Dimensional Projection",
           subtitle = 'Frame {frame} of {nframes}')+
-  theme_xkcd() +
+  #theme_xkcd() +
   #theme(text=element_text(family="Harrietshandwriting"))+
   xlab("Projection Value")+
   scale_colour_brewer(palette="Dark2")
@@ -497,7 +497,7 @@ negcorr_scatter <- ggplot(negcorr_anim, aes(x=X1, y=X2)) +
   transition_states(anglex, 1, 5)+
   ggtitle('Negatively Correlated Data with 1-Dimensional Projection',
           subtitle = 'Frame {frame} of {nframes}')+
-  theme_xkcd() +
+  #theme_xkcd() +
   #theme(text=element_text(family="Harrietshandwriting"))+
   scale_colour_brewer(palette="Dark2")
 
@@ -510,7 +510,7 @@ negcorr_density <- ggplot(negcorr_anim, aes(x=projval2, colour=group))+
   transition_states(anglex, 1, 5)+
   ggtitle("Density Plot of 1-Dimensional Projection",
           subtitle = 'Frame {frame} of {nframes}')+
-  theme_xkcd() +
+  #theme_xkcd() +
   #theme(text=element_text(family="Harrietshandwriting"))+
   xlab("Projection Value")+
   scale_colour_brewer(palette="Dark2")
@@ -553,7 +553,7 @@ Following on from our example before, let's add in a second variable, the bing s
 # Reviews Scatter Plot
 ggplot(sum_review, aes(x=afinn_sentiment, y=bing_sentiment, colour=liked))+
   geom_point() +
-  theme_xkcd() +
+  #theme_xkcd() +
   #theme(text=element_text(family="Harrietshandwriting")) +
   xlab("AFINN Sentiment") +
   ylab("Bing Sentiment") +
@@ -587,7 +587,7 @@ lda_2dim <- sum_review %>%
 ggplot(sum_review, aes(x=afinn_sentiment, y=bing_sentiment, colour=liked))+
   geom_point() +
   geom_abline(slope=0.8/5.576, intercept=0)+
-  theme_xkcd() +
+  #theme_xkcd() +
   #theme(text=element_text(family="Harrietshandwriting"))+
   xlab("AFINN Sentiment") +
   ylab("Bing Sentiment") +
@@ -599,7 +599,7 @@ ggplot(lda_2dim, aes(x=LD1, colour=liked))+
   geom_rug(alpha=0.7) +
   geom_density() + 
   geom_vline(xintercept=0, linetype=2)+
-  theme_xkcd() +
+  #theme_xkcd() +
   #theme(text=element_text(family="Harrietshandwriting"))+
   ggtitle("Density of LD1 for Food Reviews")+
   scale_colour_brewer(palette="Dark2")
