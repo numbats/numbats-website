@@ -30,7 +30,6 @@ knitr::opts_chunk$set(echo = TRUE,
                       fig.height = 4,
                       fig.width = 6,
                       fig.align = "center")
-library(ggplot2)
 library(tidyverse)
 library(LearnGeom)
 library(gganimate)
@@ -138,10 +137,13 @@ for(i in 1:39){
 fixedreviews$id <- 1:length(fixedreviews$Liked)
 
 #get sentiments
-sent1 <- get_sentiments("afinn")
-sent2 <- get_sentiments("bing")%>%
-  mutate(sentiment=ifelse(sentiment=="negative",-1,1))
-  
+# sent1 <- get_sentiments("afinn")
+# sent2 <- get_sentiments("bing")%>%
+#  mutate(sentiment=ifelse(sentiment=="negative",-1,1))
+# save(sent1, file = "data/sent1.rda")  
+# save(sent2, file = "data/sent2.rda")  
+load("https://numbat.space/post/LDA/data/sent1.rda")
+load("https://numbat.space/post/LDA/data/sent2.rda")
 
 #get each word of the review and find sentiment
 test <- fixedreviews  %>%
