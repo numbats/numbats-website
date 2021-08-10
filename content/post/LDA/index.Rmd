@@ -178,7 +178,7 @@ knitr::kable(m, digits=4, align="c")
 
 Right now, I'm not going to use both of these sentiments. We are still in the one dimensional classification case, so lets stick to the AFINN average. To see how this variable splits the reviews, lets make a density plot of the data similar to the one explained above.
 
-```{r, make A density plot of the reviews}
+```{r, make A density plot of the reviews, eval=FALSE}
 #plot density of reviews on AFINN
 ggplot(sum_review, aes(x=afinn_sentiment, colour=liked)) +
   geom_rug(alpha=0.7) +
@@ -189,6 +189,10 @@ ggplot(sum_review, aes(x=afinn_sentiment, colour=liked)) +
   ggtitle("Density of Average AFINN Sentiment for Food Reviews")+
   scale_colour_brewer(palette="Dark2")
 ```
+
+<center>
+![](img/LDA/index_files/figure-html/make A density plot of the reviews-1.png)
+</center>
 
 From this plot we can see that these distributions are neither normal, nor have similar variance. You will rarely have data that behaves exactly according to the assumptions. Does this mean we can't use LDA? Not really, it just means that if (or when) we end up with a boundary that is a bit different to what you would draw yourself, it is probably because of these incorrect assumptions. 
 
@@ -203,7 +207,7 @@ lda.pred = predict(lda.fit , sum_review)
 $$x = 2.929\times AverageSentiment_{AFINN}$$
 Where x is the "linear discriminant" for that review. We can plot this variable (although it is just afinn_sentiment scaled by a constant) with the decision bound at 0 to see what our linear discriminant space looks like: 
 
-```{r, Find LD1 Values}
+```{r, Find LD1 Values, eval=FALSE}
 #Find LD1 Values
 lda_1dim <- sum_review %>%
   dplyr::select(c(Review, liked, afinn_sentiment)) %>%
@@ -220,6 +224,10 @@ ggplot(lda_1dim, aes(x=LD1, colour=liked))+
   scale_colour_brewer(palette="Dark2")
 ```
   
+<center>  
+![](/img/LDA/index_files/figure-html/Find LD1 Values-1.png)
+</center>
+
 It looks exactly the same except now the border for a 50% threshold is at 0. You may notice this is not where the densities overlap, and that is because LDA has assumed that distribution for "No" reviews is more spread out than it is. While it isn't perfect, with this example under our belts we can move onto using LDA for dimension reduction.
 
 # LDA For Dimension Reduction
@@ -547,9 +555,10 @@ $$VarDist=({\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2}})^{-1} \times \sum_{i=1}^2
 With this information, it should be clear how we get the 1-dimensional representation that best separates the two classes. While a technical understanding is fine, it is easier to see this come together with an example.
 
 ## Example
+
 Following on from our example before, let's add in a second variable, the bing sentiment measure. Now that we have two variables we can plot them together on a scatterplot to see their relation.
 
-```{r, Reviews Scatter Plot}
+```{r, Reviews Scatter Plot, eval=FALSE}
 # Reviews Scatter Plot
 ggplot(sum_review, aes(x=afinn_sentiment, y=bing_sentiment, colour=liked))+
   geom_point() +
@@ -560,6 +569,10 @@ ggplot(sum_review, aes(x=afinn_sentiment, y=bing_sentiment, colour=liked))+
   ggtitle("Scatter Plot of Food Review Sentiments")+
   scale_colour_brewer(palette="Dark2")
 ```
+
+<center>
+![](img/LDA/index_files/figure-html/Reviews Scatter Plot-1.png)
+</center>
 
 This plot gives us a few things to note. First of all, this is clearly not two bivariate normal densities, as LDA will assume. Again, this just means our results will be slightly off. In addition to this there are a lot of 0 values for both the AFINN and bing sentiments. This can occur in two circumstances:  
 1) none of the words in the review appear in that lexicon because they are all neutral ("I'm uncertain I could call that food"), or  
@@ -577,7 +590,7 @@ lda.pred = predict(lda.fit , sum_review)
 $$ x = 0.800\times AverageSentiment_{AFINN} + 5.576\times Average Sentiment_{bing}$$
 Now, instead of the linear discriminant just scaling the variables so the 50/50 probability split is at 0, it is a linear combination of the two variables. How did it get these coefficients? Using the eigen-decomposition described above. Again, we can calculate the linear discriminant of each review, and in doing so, have a 1-dimensional projection of the data. Now that we have two variables, just like with PCA we can interpret their coefficient values. If the values are on the same scale (or you scaled them prior to performing your analysis) then this is a simple step of comparison. Unfortunately I did not do that (I wanted it to be clear which sentiment was which by the scale or I was being lazy, you pick) so instead we can plot it on the previous scatter plot and comment on the steepness of the slope. Below is a plot of the data with the line it is projected onto, as well as the resulting density.
 
-```{r, LD1 Dimension reduction and Density}
+```{r, LD1 Dimension reduction and Density, eval=FALSE}
 # LD1 Dimension reduction and Density
 
 lda_2dim <- sum_review %>%
@@ -605,6 +618,11 @@ ggplot(lda_2dim, aes(x=LD1, colour=liked))+
   scale_colour_brewer(palette="Dark2")
 ```
   
+<center>  
+![](/img/LDA/index_files/figure-html/LD1 Dimension reduction and Density-1.png)
+![](/img/LDA/index_files/figure-html/LD1 Dimension reduction and Density-2.png)
+</center>
+
 Since the slope is not steep, we can see that AFINN sentiment contributes more to the dimension reduction than bing does, and is therefore more important when it comes to separating the groups. This is how we interpret the dimension reduction. You can see that I added the decision boundary in too. Once we have a single dimension that our data exist on, the classification is exactly as it was above, drawing the line where the two densities overlap (or not quite when we violate the assumptions).  
 
 # Conclusion 
