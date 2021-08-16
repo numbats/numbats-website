@@ -20,7 +20,6 @@ tags:
   - machine learning
 ---
 
-<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
 
 
 <div id="bad-restaurants-and-lda-are-ruining-my-life" class="section level1">
@@ -127,6 +126,7 @@ tags:
 </table>
 <p><em>Note: These reviews are some of my favourites, they are not a random sample.</em></p>
 <p>Right now, I’m not going to use both of these sentiments. We are still in the one dimensional classification case, so lets stick to the AFINN average. To see how this variable splits the reviews, lets make a density plot of the data similar to the one explained above.</p>
+<p><img src="/post/LDA/index_files/figure-html/make%20A%20density%20plot%20of%20the%20reviews-1.png" width="576" style="display: block; margin: auto;" /></p>
 <center>
 <img src="img/LDA/index_files/figure-html/make%20A%20density%20plot%20of%20the%20reviews-1.png" />
 </center>
@@ -134,6 +134,7 @@ tags:
 <p>If we perform LDA on this data, we can find the coefficient of linear discriminants. Earlier I said that LDA will perform classification on its own scale, and this is how we find it. This value is used the same way it would be in a regression function, where it gives us the coefficients in the formula:</p>
 <p><span class="math display">\[x = 2.929\times AverageSentiment_{AFINN}\]</span>
 Where x is the “linear discriminant” for that review. We can plot this variable (although it is just afinn_sentiment scaled by a constant) with the decision bound at 0 to see what our linear discriminant space looks like:</p>
+<p><img src="/post/LDA/index_files/figure-html/Find%20LD1%20Values-1.png" width="576" style="display: block; margin: auto;" /></p>
 <center>
 <img src="/img/LDA/index_files/figure-html/Find%20LD1%20Values-1.png" />
 </center>
@@ -188,6 +189,7 @@ Finding a balance between these two components is what allows us to maximise the
 <div id="example-1" class="section level2">
 <h2>Example</h2>
 <p>Following on from our example before, let’s add in a second variable, the bing sentiment measure. Now that we have two variables we can plot them together on a scatterplot to see their relation.</p>
+<p><img src="/post/LDA/index_files/figure-html/Reviews%20Scatter%20Plot-1.png" width="576" style="display: block; margin: auto;" /></p>
 <center>
 <img src="img/LDA/index_files/figure-html/Reviews%20Scatter%20Plot-1.png" />
 </center>
@@ -198,6 +200,7 @@ Since this only impacts the assumptions of LDA we are going to power through.</p
 <p>Just like with the classification, we can perform LDA on this dataset and get a formula that calculates the Linear Discriminant for each review. In this example our coefficients give a function that looks like this:</p>
 <p><span class="math display">\[ x = 0.800\times AverageSentiment_{AFINN} + 5.576\times Average Sentiment_{bing}\]</span>
 Now, instead of the linear discriminant just scaling the variables so the 50/50 probability split is at 0, it is a linear combination of the two variables. How did it get these coefficients? Using the eigen-decomposition described above. Again, we can calculate the linear discriminant of each review, and in doing so, have a 1-dimensional projection of the data. Now that we have two variables, just like with PCA we can interpret their coefficient values. If the values are on the same scale (or you scaled them prior to performing your analysis) then this is a simple step of comparison. Unfortunately I did not do that (I wanted it to be clear which sentiment was which by the scale or I was being lazy, you pick) so instead we can plot it on the previous scatter plot and comment on the steepness of the slope. Below is a plot of the data with the line it is projected onto, as well as the resulting density.</p>
+<p><img src="/post/LDA/index_files/figure-html/LD1%20Dimension%20reduction%20and%20Density-1.png" width="576" style="display: block; margin: auto;" /><img src="/post/LDA/index_files/figure-html/LD1%20Dimension%20reduction%20and%20Density-2.png" width="576" style="display: block; margin: auto;" /></p>
 <center>
 <img src="/img/LDA/index_files/figure-html/LD1%20Dimension%20reduction%20and%20Density-1.png" />
 <img src="/img/LDA/index_files/figure-html/LD1%20Dimension%20reduction%20and%20Density-2.png" />

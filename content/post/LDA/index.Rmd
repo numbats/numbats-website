@@ -178,7 +178,7 @@ knitr::kable(m, digits=4, align="c")
 
 Right now, I'm not going to use both of these sentiments. We are still in the one dimensional classification case, so lets stick to the AFINN average. To see how this variable splits the reviews, lets make a density plot of the data similar to the one explained above.
 
-```{r, make A density plot of the reviews, eval=FALSE}
+```{r, make A density plot of the reviews, eval=TRUE}
 #plot density of reviews on AFINN
 ggplot(sum_review, aes(x=afinn_sentiment, colour=liked)) +
   geom_rug(alpha=0.7) +
@@ -207,7 +207,7 @@ lda.pred = predict(lda.fit , sum_review)
 $$x = 2.929\times AverageSentiment_{AFINN}$$
 Where x is the "linear discriminant" for that review. We can plot this variable (although it is just afinn_sentiment scaled by a constant) with the decision bound at 0 to see what our linear discriminant space looks like: 
 
-```{r, Find LD1 Values, eval=FALSE}
+```{r, Find LD1 Values, eval=TRUE}
 #Find LD1 Values
 lda_1dim <- sum_review %>%
   dplyr::select(c(Review, liked, afinn_sentiment)) %>%
@@ -236,7 +236,7 @@ Now we move onto the dimension reduction aspect of LDA. Remember how in the prev
 
 In my last post, I explained eigen-decomposition and how it is utilized in PCA, but it is much easier to understand when you to see it working. The animation below depicts a scatter plot of data, with a line that rotates around its centre. This line represents a potential direction for us to project our data onto (i.e. a 1-Dimensional representation). When we did PCA, we wanted to pick the line that has the highest variance, that is, had the fattest distribution when plotted as a density plot, and this animation lets us roughly see when that point is:
 
-```{r, Animation Data Function, eval=FALSE}
+```{r, Animation Data Function, eval=TRUE}
 # Made Data for Animation (Function)
 
 projectiondata <- function(xygroup, inc){
@@ -283,7 +283,7 @@ projectiondata <- function(xygroup, inc){
 }
 ```
 
-```{r, Generate Data Frames, eval=FALSE}
+```{r, Generate Data Frames, eval=TRUE}
 #Generate Data Frames
 
 #no class data for PCA
@@ -310,7 +310,7 @@ negcorr <- data.frame(rmvnorm(100, mean=c(2,2), sigs)) %>%
 
 ```
 
-```{r, PCA Animation Code, eval=FALSE}
+```{r, PCA Animation Code, eval=TRUE}
 # PCA Animation Code
 
 #make animation data frame
@@ -368,7 +368,7 @@ Finding a balance between these two components is what allows us to maximise the
 
 To start, lets take the variance and covariance of the data completely out of the equation and look at a simple case where our variables have no correlation and our classes are just two bivariate normals with different means.  
 
-```{r, Nocorr Animations, eval=FALSE}
+```{r, Nocorr Animations, eval=TRUE}
 #Nocorr Animations
 
 #make data
@@ -422,7 +422,7 @@ anim_save("draw/nocorr_density.gif", nocorr_density)
   
 The animation shows two distributions that change in central location, but their shape stays the same. Since the scatter plot shape of each group is essentially circular (due to the 0 correlation of the variables), no matter what direction we project the data into the shape (and therefore variance) will be the same. This means we can ignore the variance and focus on maximising the distance between the means. This is achieved by projecting the data on the line that goes through the two group averages. Moving on from this simple example, lets make things more interesting and look at some data where the variables are correlated.
 
-```{r, Poscorr Animation, eval=FALSE}
+```{r, Poscorr Animation, eval=TRUE}
 #Poscorr Animation
 
 #make data
@@ -476,7 +476,7 @@ anim_save("draw/poscorr_density.gif", poscorr_density)
   
 Now we can see two forces at play. Just as before, when the line goes through the two means the data is most separated, but this is no longer the only factor we need to consider. The positive correlation means that the direction we project the data onto can now also flatten or steepen the curve. We can no longer use the line that goes through the two means, because if another direction brings the distributions closer, but also significantly decreases the spread, that would be the preferable option. We can see this in example with negative correlation too.
 
-```{r, Negcorr Animation, eval=FALSE}
+```{r, Negcorr Animation, eval=TRUE}
 #Negcorr Animation
 
 #make data
@@ -558,7 +558,7 @@ With this information, it should be clear how we get the 1-dimensional represent
 
 Following on from our example before, let's add in a second variable, the bing sentiment measure. Now that we have two variables we can plot them together on a scatterplot to see their relation.
 
-```{r, Reviews Scatter Plot, eval=FALSE}
+```{r, Reviews Scatter Plot, eval=TRUE}
 # Reviews Scatter Plot
 ggplot(sum_review, aes(x=afinn_sentiment, y=bing_sentiment, colour=liked))+
   geom_point() +
@@ -590,7 +590,7 @@ lda.pred = predict(lda.fit , sum_review)
 $$ x = 0.800\times AverageSentiment_{AFINN} + 5.576\times Average Sentiment_{bing}$$
 Now, instead of the linear discriminant just scaling the variables so the 50/50 probability split is at 0, it is a linear combination of the two variables. How did it get these coefficients? Using the eigen-decomposition described above. Again, we can calculate the linear discriminant of each review, and in doing so, have a 1-dimensional projection of the data. Now that we have two variables, just like with PCA we can interpret their coefficient values. If the values are on the same scale (or you scaled them prior to performing your analysis) then this is a simple step of comparison. Unfortunately I did not do that (I wanted it to be clear which sentiment was which by the scale or I was being lazy, you pick) so instead we can plot it on the previous scatter plot and comment on the steepness of the slope. Below is a plot of the data with the line it is projected onto, as well as the resulting density.
 
-```{r, LD1 Dimension reduction and Density, eval=FALSE}
+```{r, LD1 Dimension reduction and Density, eval=TRUE}
 # LD1 Dimension reduction and Density
 
 lda_2dim <- sum_review %>%
@@ -630,6 +630,8 @@ So to conclude, I have emotional problems that I often worry are slowly getting 
   
 # Data Reference
 lucif3r. (2021, June). Restaurant Reviews: Dataset for Natural language Processing, Version 1. Retrieved June 30 2021 from https://www.kaggle.com/d4rklucif3r/restaurant-reviews.
+
+
 
 
 ```{r, include=FALSE, eval=FALSE}
