@@ -190,9 +190,7 @@ ggplot(sum_review, aes(x=afinn_sentiment, colour=liked)) +
   scale_colour_brewer(palette="Dark2")
 ```
 
-<center>
-![](img/LDA/index_files/figure-html/make A density plot of the reviews-1.png)
-</center>
+
 
 From this plot we can see that these distributions are neither normal, nor have similar variance. You will rarely have data that behaves exactly according to the assumptions. Does this mean we can't use LDA? Not really, it just means that if (or when) we end up with a boundary that is a bit different to what you would draw yourself, it is probably because of these incorrect assumptions. 
 
@@ -224,9 +222,6 @@ ggplot(lda_1dim, aes(x=LD1, colour=liked))+
   scale_colour_brewer(palette="Dark2")
 ```
   
-<center>  
-![](/img/LDA/index_files/figure-html/Find LD1 Values-1.png)
-</center>
 
 It looks exactly the same except now the border for a 50% threshold is at 0. You may notice this is not where the densities overlap, and that is because LDA has assumed that distribution for "No" reviews is more spread out than it is. While it isn't perfect, with this example under our belts we can move onto using LDA for dimension reduction.
 
@@ -310,7 +305,7 @@ negcorr <- data.frame(rmvnorm(100, mean=c(2,2), sigs)) %>%
 
 ```
 
-```{r, PCA Animation Code, eval=TRUE}
+```{r, PCA Animation Code, eval=FALSE}
 # PCA Animation Code
 
 #make animation data frame
@@ -352,7 +347,7 @@ anim_save("draw/pca_density.gif", pca_density)
 <center>
 ![](/img/LDA/draw/pca_scatter.gif){width=48%} ![](/img/LDA/draw/pca_density.gif){width=48%} 
 </center>
-  
+
 The point of this is visually show you the value of eigen decomposition. It gives an instant analytical result for what we could try to find with the animation above.   
 
 How is this relevant to LDA? Well it also uses an eigen decomposition, but it isn't as straight forward as the PCA case. Now we have classes that we need to take into account. LDA decomposition works with the goal of minimising the overlap between classes. That is, if we plot the density of the two groups, we want the smallest possible overlap, as shown below.
@@ -368,7 +363,7 @@ Finding a balance between these two components is what allows us to maximise the
 
 To start, lets take the variance and covariance of the data completely out of the equation and look at a simple case where our variables have no correlation and our classes are just two bivariate normals with different means.  
 
-```{r, Nocorr Animations, eval=TRUE}
+```{r, Nocorr Animations, eval=FALSE}
 #Nocorr Animations
 
 #make data
@@ -419,10 +414,10 @@ anim_save("draw/nocorr_density.gif", nocorr_density)
 <center>
 ![](/img/LDA/draw/nocorr_scatter.gif){width=48%} ![](/img/LDA/draw/nocorr_density.gif){width=48%}
 </center>
-  
+
 The animation shows two distributions that change in central location, but their shape stays the same. Since the scatter plot shape of each group is essentially circular (due to the 0 correlation of the variables), no matter what direction we project the data into the shape (and therefore variance) will be the same. This means we can ignore the variance and focus on maximising the distance between the means. This is achieved by projecting the data on the line that goes through the two group averages. Moving on from this simple example, lets make things more interesting and look at some data where the variables are correlated.
 
-```{r, Poscorr Animation, eval=TRUE}
+```{r, Poscorr Animation, eval=FALSE}
 #Poscorr Animation
 
 #make data
@@ -473,10 +468,11 @@ anim_save("draw/poscorr_density.gif", poscorr_density)
 <center>
 ![](/img/LDA/draw/poscorr_scatter.gif){width=48%} ![](/img/LDA/draw/poscorr_density.gif){width=48%}
 </center>
+
   
 Now we can see two forces at play. Just as before, when the line goes through the two means the data is most separated, but this is no longer the only factor we need to consider. The positive correlation means that the direction we project the data onto can now also flatten or steepen the curve. We can no longer use the line that goes through the two means, because if another direction brings the distributions closer, but also significantly decreases the spread, that would be the preferable option. We can see this in example with negative correlation too.
 
-```{r, Negcorr Animation, eval=TRUE}
+```{r, Negcorr Animation, eval=FALSE}
 #Negcorr Animation
 
 #make data
@@ -529,7 +525,7 @@ anim_save("draw/negcorr_density.gif", negcorr_density)
 <center>
 ![](/img/LDA/draw/negcorr_scatter.gif){width=48%} ![](/img/LDA/draw/negcorr_density.gif){width=48%}
 </center>
-  
+
 Now that we have seen how this works intuitively, we can go through how this is calculated. So, how does LDA perform a decomposition that accounts for these two competing elements? It combines two matrices in the eigen-decomposition, the variance covariance matrix and a matrix of the between group averages.  
 
 First we want to minimise the within class variance of the projected data. The first important thing to note is that by the assumptions of LDA, all the classes have identical variance-covariance matrices. Therefore to calculate the matrix, we get the variance-covariance matrix of each isolated class, and then average them. The averaging shouldn't change the values (if your LDA assumptions are correct), it should just makes the estimate more accurate. This is illustrated in the picture below.
@@ -569,10 +565,6 @@ ggplot(sum_review, aes(x=afinn_sentiment, y=bing_sentiment, colour=liked))+
   ggtitle("Scatter Plot of Food Review Sentiments")+
   scale_colour_brewer(palette="Dark2")
 ```
-
-<center>
-![](img/LDA/index_files/figure-html/Reviews Scatter Plot-1.png)
-</center>
 
 This plot gives us a few things to note. First of all, this is clearly not two bivariate normal densities, as LDA will assume. Again, this just means our results will be slightly off. In addition to this there are a lot of 0 values for both the AFINN and bing sentiments. This can occur in two circumstances:  
 1) none of the words in the review appear in that lexicon because they are all neutral ("I'm uncertain I could call that food"), or  
@@ -618,10 +610,6 @@ ggplot(lda_2dim, aes(x=LD1, colour=liked))+
   scale_colour_brewer(palette="Dark2")
 ```
   
-<center>  
-![](/img/LDA/index_files/figure-html/LD1 Dimension reduction and Density-1.png)
-![](/img/LDA/index_files/figure-html/LD1 Dimension reduction and Density-2.png)
-</center>
 
 Since the slope is not steep, we can see that AFINN sentiment contributes more to the dimension reduction than bing does, and is therefore more important when it comes to separating the groups. This is how we interpret the dimension reduction. You can see that I added the decision boundary in too. Once we have a single dimension that our data exist on, the classification is exactly as it was above, drawing the line where the two densities overlap (or not quite when we violate the assumptions).  
 
@@ -631,7 +619,9 @@ So to conclude, I have emotional problems that I often worry are slowly getting 
 # Data Reference
 lucif3r. (2021, June). Restaurant Reviews: Dataset for Natural language Processing, Version 1. Retrieved June 30 2021 from https://www.kaggle.com/d4rklucif3r/restaurant-reviews.
 
+# Code
 
+The code to  reproduce these examples is available at the [numbat.space GitHub](https://raw.githubusercontent.com/numbats/numbats-website/master/content/post/LDA/index.Rmd). And data files are [here](https://github.com/numbats/numbats-website/tree/master/content/post/LDA/data).
 
 
 ```{r, include=FALSE, eval=FALSE}
