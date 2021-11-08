@@ -26,5 +26,5 @@ interests:
 - computation and design
 user_groups:
 - Postdoc
-- Current
+- Alumni
 ---
