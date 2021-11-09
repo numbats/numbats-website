@@ -5,7 +5,7 @@ email: david.frazier@monash.edu
 name: David Frazier
 organizations:
 - name: Monash University
-role: Senior Research Fellow and ARC DECRA Fellow
+role: Associate Professor and ARC DECRA Fellow
 social:
 - icon: link
   icon_pack: fas

@@ -5,7 +5,7 @@ email: michael.lydeamore@monash.edu
 name: Michael Lydeamore
 organizations:
 - name: Monash University
-role: Lecturer in Econometrics
+role: Lecturer in Statistics
 social:
 - icon: link
   icon_pack: fas
