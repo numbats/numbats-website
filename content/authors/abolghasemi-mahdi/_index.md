@@ -20,5 +20,5 @@ interests:
 - business analytics
 user_groups:
 - Postdoc
-- Current
+- Alumni
 ---
