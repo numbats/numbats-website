@@ -15,13 +15,13 @@ social:
   link: https://github.com/harriet-mason
 - icon: envelope
   icon_pack: fas
-  link: "mailto:hmas0003@student.monash.edu"
+  link: "mailto:harriet.mason@monash.edu"
 interests:
 - statistical computing
 - data visualisation
 - data storytelling
 - visual explanations
 user_groups:
-- Research Assistant
+- PhD Student
 - Current
 ---

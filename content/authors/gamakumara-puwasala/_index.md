@@ -14,5 +14,5 @@ interests:
 - applied statistics
 user_groups:
 - Postdoc
-- Current
+- Alumni
 ---
