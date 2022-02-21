@@ -5,7 +5,7 @@ email: DiCook@monash.edu
 name: Di Cook
 organizations:
 - name: Monash University
-role: Professor of Business Analytics
+role: Professor of Statistics
 social:
 - icon: link
   icon_pack: fas

@@ -1,6 +1,6 @@
 ---
 authors:
-- lydeamore
+- lydeamore-michael
 email: michael.lydeamore@monash.edu
 name: Michael Lydeamore
 organizations:
