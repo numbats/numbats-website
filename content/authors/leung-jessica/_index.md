@@ -5,7 +5,7 @@ email: jessica.leung@monash.edu
 name: Jessica Leung
 organizations:
 - name: Monash University
-role: Lecturer in Statistics
+role: Lecturer in Business Analytics
 social:
 - icon: link
   icon_pack: fas
