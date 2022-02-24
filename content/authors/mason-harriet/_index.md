@@ -5,7 +5,7 @@ email: mail@hmas0003@student.monash.edu
 name: Harriet Mason
 organizations:
 - name: Monash University
-role: Research Assistant
+role: PhD (Statistics)
 social:
 - icon: twitter
   icon_pack: fab
