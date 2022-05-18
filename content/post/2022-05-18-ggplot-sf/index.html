@@ -1,0 +1,103 @@
+---
+title: ggplot-sf
+author: H. Sherry Zhang
+date: '2022-05-18'
+slug: []
+categories:
+  - data visualisation
+  - statistics
+tags:
+  - data visualisation
+  - R
+  - statistics
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2022-05-18T23:09:37+10:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+
+
+<p>Here we have a map data (<code>ohio</code>) with 88 counties in Ohio and it is in an <code>sf</code> object:</p>
+<pre><code>## Simple feature collection with 88 features and 1 field
+## Geometry type: POLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -84.8203 ymin: 38.40342 xmax: -80.5182 ymax: 42.32713
+## Geodetic CRS:  NAD83
+## # A tibble: 88 × 2
+##    NAME                                                                 geometry
+##    &lt;chr&gt;                                                           &lt;POLYGON [°]&gt;
+##  1 Auglaize   ((-84.13476 40.65755, -84.13467 40.65755, -84.13405 40.65753, -84…
+##  2 Crawford   ((-82.77258 40.99589, -82.77258 40.99588, -82.77168 40.99588, -82…
+##  3 Montgomery ((-84.06231 39.8366, -84.06301 39.83665, -84.06501 39.83677, -84.…
+##  4 Guernsey   ((-81.22986 40.06315, -81.22987 40.06308, -81.22992 40.06119, -81…
+##  5 Clark      ((-83.83875 39.8233, -83.83889 39.82335, -83.83904 39.82339, -83.…
+##  6 Gallia     ((-82.18737 38.72608, -82.18727 38.72558, -82.18707 38.72488, -82…
+##  7 Fairfield  ((-82.82307 39.80773, -82.82307 39.8078, -82.82305 39.80801, -82.…
+##  8 Darke      ((-84.43157 40.15801, -84.43148 40.15487, -84.43148 40.1542, -84.…
+##  9 Monroe     ((-81.22569 39.57838, -81.24065 39.57883, -81.2413 39.57885, -81.…
+## 10 Portage    ((-81.3184 40.98861, -81.31892 40.98862, -81.31927 40.98862, -81.…
+## # … with 78 more rows</code></pre>
+<p>There is also a variable that we would like to plot on the map, and here this is standardized incidence ratios (SIRs). For the details on how to calculate this metric, Paula Moraga’s book <a href="https://www.paulamoraga.com/book-geospatial/index.html">Geospatial Health Data: Modeling and Visualization with R-INLA and Shiny</a> has detailed all the steps you need from Section <a href="https://www.paulamoraga.com/book-geospatial/sec-arealdataexamplest.html#sec-arealdataexamplest">7.1</a> to the end of Section <a href="https://www.paulamoraga.com/book-geospatial/sec-arealdataexamplest.html#data-preparation-1">7.2</a>. The main point here is that we have another dataset (<code>sir</code>) with SIR values for each county in the map data across year (1968 - 1988):</p>
+<pre><code>## # A tibble: 1,848 × 3
+##    county  year   SIR
+##    &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
+##  1 Adams   1968 0.725
+##  2 Adams   1969 0.588
+##  3 Adams   1970 1.03 
+##  4 Adams   1971 0.654
+##  5 Adams   1972 1.05 
+##  6 Adams   1973 0.693
+##  7 Adams   1974 1.15 
+##  8 Adams   1975 1.17 
+##  9 Adams   1976 0.936
+## 10 Adams   1977 0.644
+## # … with 1,838 more rows</code></pre>
+<p>Now, let’s join the two datasets and plot SIR on the map, faceted by year:</p>
+<pre class="r"><code>combined &lt;- ohio %&gt;% 
+  left_join(sir, by = c(&quot;NAME&quot; = &quot;county&quot;))
+
+combined %&gt;% 
+  ggplot() + 
+  geom_sf(aes(fill = SIR)) +
+  facet_wrap(~year, dir = &quot;h&quot;, ncol = 7) +
+  ggtitle(&quot;SIR&quot;) + 
+  theme_bw() +
+  theme(
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank()
+  ) +
+  scale_fill_gradient2(
+    midpoint = 1, low = &quot;blue&quot;, mid = &quot;white&quot;, high = &quot;red&quot;
+  )</code></pre>
+<p>Easy peasy.</p>
+<p>But, have you thought about how long it would take to render this plot you just see?</p>
+<p><centre>
+<img src="/post/2022-05-18-ggplot-sf/sir.png" /></p>
+<p>Let me first give you some magnitude: here I plot 1) single <code>sf</code> object (left), 2) a single year (1968) with SIR filled (mid), and 3) two years (1968 &amp; 1969) with SIR filled in facets. The title prints out the number of second it takes to create each plot (elapsed time):</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><centre>
+<img src="/post/2022-05-18-ggplot-sf/compare-benchplot.png" /></p>
+<p>okay, this look fine, how long do you think it is going to take to render the full with full year?</p>
+<ul>
+<li><p>~1 second? If same map is copied across all the year, the increment of adding facets and fill from 1) to 2) is 0.096 (0.93 - 0.834).</p></li>
+<li><p>~17 seconds? The increment from 2) to 3) is 0.85 (1.78-0.93), and if we project that into 20 more facets, it will give us: 0.903 + (1.78-0.93) * 20 = 17.903 sec.</p></li>
+<li><p>30 seconds, 40 seconds, 1 minutes, I don’t know? The only thing I know is that I waited much longer than I expected for this plot.</p></li>
+</ul>
+<p>Let check on what <code>benchplot()</code> says:</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>35.786</p>
+<p>WOW, much larger than what we predict!</p>
+<p><code>benchplot()</code> actually provides more details in terms of building, rendering, and drawing time:</p>
+<p><centre>
+<img src="/post/2022-05-18-ggplot-sf/benchplot-time.png" /></p>
+<p>Notice here on the y-axis is the <strong>square root of elapsed time</strong> and the text on each bar is the <strong>actual elapsed time</strong>. Building and rendering time looks okay for each plot but a drawing time of 31.66 second to draw all those? WOW again.</p>
+<p>[more insights on how it takes that long to draw, potentially from grid or anything?]</p>
+<p>[but this can be definitely simplified, since we are drawing exactly the same map across all facets]</p>

@@ -1,0 +1,267 @@
+---
+title: ggplot-sf
+author: H. Sherry Zhang
+date: '2022-05-18'
+slug: []
+categories:
+  - data visualisation
+  - statistics
+tags:
+  - data visualisation
+  - R
+  - statistics
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2022-05-18T23:09:37+10:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      message = FALSE,
+                      fig.align = "center")
+library(SpatialEpiApp)
+library(SpatialEpi)
+library(tidyverse)
+library(sf)
+library(patchwork)
+```
+
+
+```{r}
+ohio <- read_sf(system.file("SpatialEpiApp/data/Ohio/fe_2007_39_county/fe_2007_39_county.shp", 
+                           package = "SpatialEpiApp")) %>% 
+  select(NAME, geometry)
+```
+
+
+Here we have a map data (`ohio`) with `r nrow(ohio)` counties in Ohio and it is in an `sf` object: 
+
+```{r}
+ohio
+```
+
+There is also a variable that we would like to plot on the map, and here this is standardized incidence ratios (SIRs). For the details on how to calculate this metric, Paula Moraga's book [Geospatial Health Data: Modeling and Visualization with R-INLA and Shiny](https://www.paulamoraga.com/book-geospatial/index.html) has detailed all the steps you need from Section [7.1](https://www.paulamoraga.com/book-geospatial/sec-arealdataexamplest.html#sec-arealdataexamplest) to the end of Section [7.2](https://www.paulamoraga.com/book-geospatial/sec-arealdataexamplest.html#data-preparation-1). The main point here is that we have another dataset (`sir`) with SIR values for each county in the map data across year (1968 - 1988): 
+
+```{r}
+ohio_raw <- read_csv(system.file("SpatialEpiApp/data/Ohio/dataohiocomplete.csv", 
+                    package = "SpatialEpiApp"))
+
+dt <- ohio_raw %>% arrange(county, year, gender, race) 
+res <- dt %>% 
+  group_by(NAME, year) %>% 
+  summarise(Y = sum(y)) %>% 
+  ungroup()
+
+n_strata <- 4
+E <- expected(population = dt$n, cases = dt$y, n.strata = n_strata)
+nyears <- length(unique(ohio_raw$year))
+countiesE <- rep(unique(ohio_raw$NAME), each = nyears)
+
+ncounties <- length(unique(ohio_raw$NAME))
+yearsE <- rep(unique(ohio_raw$year), time = ncounties)
+
+sir <- tibble(county = countiesE, year = yearsE, E = E) %>% 
+  left_join(res, by = c("county" = "NAME", "year")) %>% 
+  mutate(SIR = Y/E) %>% 
+  select(county, year, SIR)
+```
+
+```{r}
+sir
+```
+
+Now, let's join the two datasets and plot SIR on the map, faceted by year: 
+
+
+```{r eval = FALSE, echo = TRUE}
+combined <- ohio %>% 
+  left_join(sir, by = c("NAME" = "county"))
+
+combined %>% 
+  ggplot() + 
+  geom_sf(aes(fill = SIR)) +
+  facet_wrap(~year, dir = "h", ncol = 7) +
+  ggtitle("SIR") + 
+  theme_bw() +
+  theme(
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank()
+  ) +
+  scale_fill_gradient2(
+    midpoint = 1, low = "blue", mid = "white", high = "red"
+  )
+```
+
+```{r eval = FALSE}
+ggsave(
+       filename = here::here("content/post/2022-05-18-ggplot-sf/sir.png"),
+       width = 9, height = 5.5)
+```
+
+Easy peasy. 
+
+But, have you thought about how long it would take to render this plot you just see?
+
+<centre>
+![](/post/2022-05-18-ggplot-sf/sir.png)
+
+Let me first give you some magnitude: here I plot 1) single `sf` object (left), 2) a single year (1968) with SIR filled (mid), and 3) two years (1968 & 1969) with SIR filled in facets. The title prints out the number of second it takes to create each plot (elapsed time): 
+
+```{r results='hide'}
+combined <- ohio %>% 
+  left_join(sir, by = c("NAME" = "county")) 
+
+p1 <- ohio %>% ggplot() + geom_sf() +  theme_bw() +
+  theme(
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank()
+  )
+p2 <- combined %>% 
+  filter(year == 1968) %>% 
+  ggplot() + geom_sf(aes(fill = SIR)) + 
+    theme_bw() +
+  facet_wrap(~year, dir = "h", ncol = 7) +
+  theme(
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank(),
+  )  + 
+  scale_fill_gradient2(
+    limits = c(0, range(combined$SIR)[2]),
+    midpoint = 1, low = "blue", mid = "white", high = "red", 
+  )
+
+p3 <- combined %>% 
+  filter(year %in% c(1968, 1969)) %>% 
+  ggplot() + 
+  geom_sf(aes(fill = SIR)) + 
+  facet_wrap(~year, dir = "h", ncol = 7) +
+  theme_bw() +
+  theme(
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank()
+  )  + 
+  scale_fill_gradient2(
+    limits = c(0, range(combined$SIR)[2]),
+    midpoint = 1, low = "blue", mid = "white", high = "red", 
+  )
+
+
+time_p1 <- benchplot(p1)
+time_p2 <- benchplot(p2)
+time_p3 <- benchplot(p3) # 0.88
+```
+
+```{r eval = FALSE}
+p5 <- p1 + 
+  labs(title = "1) single `sf` object",
+       subtitle = glue::glue("{round(time_p1$elapsed[5], 5)} secs"))
+
+p6 <- p2 + 
+  labs(title = "2) a single year (1968) with SIR filled",
+       subtitle = glue::glue("{round(time_p2$elapsed[5], 5)} secs"))
+
+p7 <- p3 + 
+  labs(title = "3) two years (1968 & 1969) with SIR filled in facets",
+       subtitle = glue::glue("{round(time_p3$elapsed[5], 5)} secs")) 
+
+p8 <- p4 + ggtitle(glue::glue("SIR: 21 years - {round(time_p4$elapsed[5], 5)} secs")) 
+  
+
+(p5 | p6 | p7) + 
+  plot_layout(guides = 'collect', widths = c(1, 1, 2)) &
+  theme(legend.position='right')
+```
+
+
+```{r eval = FALSE}
+ggsave( 
+       filename = here::here("content/post/2022-05-18-ggplot-sf/compare-benchplot.png"),
+       width = 10, height = 3.5)
+```
+
+<centre>
+![](/post/2022-05-18-ggplot-sf/compare-benchplot.png)
+
+okay, this look fine, how long do you think it is going to take to render the full with full year? 
+
+ - ~1 second? If same map is copied across all the year, the increment of adding facets and fill from 1) to 2) is 0.096 (0.93 - 0.834). 
+ 
+ - ~17 seconds? The increment from 2) to 3) is 0.85 (1.78-0.93), and if we project that into 20 more facets, it will give us: 0.903 + (1.78-0.93) * 20 = 17.903 sec.
+ 
+ - 30 seconds, 40 seconds, 1 minutes, I don't know? The only thing I know is that I waited much longer than I expected for this plot. 
+
+Let check on what `benchplot()` says: 
+
+```{r results='hide'}
+p4 <-  ohio %>% 
+  left_join(sir, by = c("NAME" = "county")) %>% 
+  ggplot() + 
+  geom_sf(aes(fill = SIR)) +
+  facet_wrap(~year, dir = "h", ncol = 7) +
+  ggtitle("SIR") + 
+  theme_bw() +
+  theme(
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank()
+  ) +
+  scale_fill_gradient2(
+    midpoint = 1, low = "blue", mid = "white", high = "red"
+  )
+
+time_p4 <- benchplot(p4) # 35.5
+```
+
+`r round(time_p4$elapsed[5], 5)`
+
+WOW, much larger than what we predict! 
+
+`benchplot()` actually provides more details in terms of building, rendering, and drawing time: 
+
+```{r}
+dt <- bind_rows(time_p1 %>% mutate(plot = "p1"),
+          time_p2 %>% mutate(plot = "p2"),
+          time_p3 %>% mutate(plot = "p3"),
+          time_p4 %>% mutate(plot = "p4")) %>% 
+  as_tibble() %>% 
+  mutate(step = fct_relevel(step, c("construct", "build", "render", "draw", "TOTAL")))
+```
+
+```{r eval = FALSE}
+dt %>% filter(step != "construct") %>% 
+  ggplot(aes(x = plot, y = sqrt(elapsed), color = plot, fill = plot)) + 
+  geom_col() + 
+  geom_text(aes(y = sqrt(elapsed) - 0.1, label = round(elapsed, 2)), color = "black")+ 
+  facet_wrap(vars(step), nrow = 1)  + 
+  scale_y_continuous(breaks = seq(0, 6, 1)) + 
+  labs(y = "square root of elapsed time")
+```
+
+```{r eval = FALSE}
+ggsave( 
+       filename = here::here("content/post/2022-05-18-ggplot-sf/benchplot-time.png"),
+       width = 10, height = 3.5)
+```
+
+<centre>
+![](/post/2022-05-18-ggplot-sf/benchplot-time.png)
+
+
+Notice here on the y-axis is the **square root of elapsed time** and the text on each bar is the **actual elapsed time**. Building and rendering time looks okay for each plot but a drawing time of 31.66 second to draw all those? WOW again. 
+
+[more insights on how it takes that long to draw, potentially from grid or anything?]
+
+
+[but this can be definitely simplified, since we are drawing exactly the same map across all facets]
