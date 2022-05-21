@@ -1,0 +1,346 @@
+---
+title: "ggplot-sf"
+author: "H. Sherry Zhang"
+date: '2022-05-21'
+slug: []
+categories: []
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2022-05-21T22:49:21+10:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, 
+                      message = FALSE,
+                      fig.align = "center", cache = TRUE)
+library(SpatialEpiApp)
+library(SpatialEpi)
+library(tidyverse)
+library(sf)
+library(patchwork)
+```
+
+We all see faceted plots and don't tell me you don't, unless you never use a calendar; We all see maps and don't tell me you don't, unless you never get to somewhere. Here I have an interesting observation on faceted maps for you. 
+
+```{r}
+ohio <- read_sf(system.file("SpatialEpiApp/data/Ohio/fe_2007_39_county/fe_2007_39_county.shp", 
+                           package = "SpatialEpiApp")) %>% 
+  select(NAME, geometry)
+```
+
+This example comes from [Chapter 7 of Paula Moraga's book Geospatial Health Data: Modeling and Visualization with R-INLA and Shiny](https://www.paulamoraga.com/book-geospatial/sec-arealdataexamplest.html) and I have simplified it for my demonstration. In essence, there are two datasets: 
+
+1. A map data (`ohio`) with `r nrow(ohio)` Ohio counties in an `sf` object: 
+
+```{r}
+ohio
+```
+
+2. A lung cancer data with standardized incidence ratios (SIRs) calculated for each county across 21 years (1968 - 1988):
+
+```{r}
+ohio_raw <- read_csv(system.file("SpatialEpiApp/data/Ohio/dataohiocomplete.csv", 
+                    package = "SpatialEpiApp"))
+
+dt <- ohio_raw %>% arrange(county, year, gender, race) 
+res <- dt %>% 
+  group_by(NAME, year) %>% 
+  summarise(Y = sum(y)) %>% 
+  ungroup()
+
+n_strata <- 4
+E <- expected(population = dt$n, cases = dt$y, n.strata = n_strata)
+nyears <- length(unique(ohio_raw$year))
+countiesE <- rep(unique(ohio_raw$NAME), each = nyears)
+
+ncounties <- length(unique(ohio_raw$NAME))
+yearsE <- rep(unique(ohio_raw$year), time = ncounties)
+
+sir <- tibble(county = countiesE, year = yearsE, E = E) %>% 
+  left_join(res, by = c("county" = "NAME", "year")) %>% 
+  mutate(SIR = Y/E) %>% 
+  select(county, year, SIR)
+```
+
+```{r}
+sir
+```
+
+The details on calculating SIR is not particularly of our interest and Section [7.1](https://www.paulamoraga.com/book-geospatial/sec-arealdataexamplest.html#sec-arealdataexamplest) to [7.2](https://www.paulamoraga.com/book-geospatial/sec-arealdataexamplest.html#data-preparation-1) of the book has detailed all the steps you are interested. 
+
+What we want to do here is to plot the SIR values for each county on the map across year. This would need join the two datasets (`left_join`), setup the ggplot (`ggplot`), plot the map with `geom_sf`, use `SIR` as the fill, facet the plot by `year`, and a bunch of tweak on theme and color scale:
+
+```{r echo = TRUE}
+combined <- ohio %>% 
+  left_join(sir, by = c("NAME" = "county"))
+
+target <- combined %>% 
+  ggplot() + 
+  geom_sf(aes(fill = SIR)) +
+  facet_wrap(~year, dir = "h", ncol = 7) +
+  ggtitle("SIR") + 
+  theme_bw() +
+  theme(
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank()
+  ) +
+  scale_fill_gradient2(
+    midpoint = 1, low = "blue", mid = "white", high = "red"
+  )
+```
+
+```{r eval = FALSE}
+target
+```
+
+```{r eval = FALSE}
+ggsave(
+       filename = here::here("content/post/2022-05-21-ggplot-sf/sir.png"),
+       width = 9, height = 5.5)
+```
+
+<centre>
+![](/post/2022-05-21-ggplot-sf/sir.png)
+
+Easy peasy. 
+
+But, have you thought about how long it would take to render this plot you just see?
+
+Let me show you some components of this plot as benchmarks, here I have: 
+
+  1) `P1`: a single map object (left): **0.834 secs**
+  
+  2) `P2`: a single year (1968) with SIR filled (mid): **0.903 secs**, and
+  
+  3) `P3`: two years (1968 & 1969) with SIR filled in facets (right): **1.78 secs**
+
+```{r}
+combined <- ohio %>% 
+  left_join(sir, by = c("NAME" = "county")) 
+
+make_plot <- function(data){
+  data %>% 
+    ggplot() + 
+    geom_sf(aes(fill = SIR)) + 
+    theme_bw() +
+    facet_wrap(~year, dir = "h", ncol = 7) +
+    theme(
+      axis.text.x = element_blank(),
+      axis.text.y = element_blank(),
+      axis.ticks = element_blank(),
+    )  + 
+    scale_fill_gradient2(
+      limits = c(0, range(combined$SIR)[2]),
+      midpoint = 1, low = "blue", mid = "white", high = "red", 
+    )
+}
+```
+
+```{r eval = FALSE}
+p1 <- ohio %>% ggplot() + geom_sf() +  theme_bw() +
+  theme(
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank()
+  )
+p2 <- combined %>% 
+  filter(year == 1968) %>% 
+  make_plot()
+  
+
+p3 <- combined %>% 
+  filter(year %in% c(1968, 1969)) %>% 
+  make_plot()
+
+p4 <- combined %>% make_plot()
+
+time_p1 <- benchplot(p1)
+time_p2 <- benchplot(p2)
+time_p3 <- benchplot(p3) # 0.88
+time_p4 <- benchplot(p4) # 0.88
+```
+
+```{r eval = FALSE}
+p5 <- p1 + 
+  labs(title = "1) a single map object",
+       subtitle = glue::glue("{round(time_p1$elapsed[5], 5)} secs"))
+
+p6 <- p2 + 
+  labs(title = "2) a single year (1968) \br with SIR filled",
+       subtitle = glue::glue("{round(time_p2$elapsed[5], 5)} secs"))
+
+p7 <- p3 + 
+  labs(title = "3) two years (1968 & 1969) with SIR filled in facets",
+       subtitle = glue::glue("{round(time_p3$elapsed[5], 5)} secs")) 
+
+(p5 | p6 | p7) + 
+  plot_layout(guides = 'collect', widths = c(1, 1, 2)) &
+  theme(legend.position='right')
+```
+
+
+```{r eval = FALSE}
+ggsave( 
+       filename = here::here("content/post/2022-05-21-ggplot-sf/compare-benchplot.png"),
+       width = 10, height = 3.5)
+```
+
+<centre>
+![](/post/2022-05-21-ggplot-sf/compare-benchplot.png)
+
+okay, now it is your time to make a guess. 
+
+ - ~1 second? Ideally if the same map is copied across all the year, the increment of more facets would just be marginal. 
+ 
+ - ~18 seconds? The increment of rendering another facet from 2) to 3) is 0.85 (1.78-0.93) sec.  Projecting that into 20 more facets will give us: 0.903 + (1.78-0.93) * 20 = 17.903 sec. 
+ 
+ - 30 seconds, 40 seconds, 1 minutes? I don't know. I just run your code and have waited a while for this plot to appear. 
+
+There are different ways to check the time it takes for a certain command to run and here we use `ggplot2::benchplot()`, which can break down the plot by building, rendering, and drawing:
+
+```{r}
+ggplot2::benchplot
+```
+
+```{r results='hide'}
+time_target <- ggplot2::benchplot(target)
+```
+
+```{r}
+time_target
+```
+
+
+WOW, I do not expect it to take a total of `r round(time_target$elapsed[5], 5)` secs to render our target plot! 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We can take a look at the decomposition of time for the three benchmark plots before. This would give us an idea of where our target plot take long. 
+
+```{r}
+dt <- bind_rows(time_p1 %>% mutate(plot = "p1"),
+          time_p2 %>% mutate(plot = "p2"),
+          time_p3 %>% mutate(plot = "p3"),
+          time_p4 %>% mutate(plot = "p4")) %>% 
+  as_tibble() %>% 
+  mutate(step = fct_relevel(step, c("construct", "build", "render", "draw", "TOTAL")))
+```
+
+```{r eval = FALSE}
+dt %>% filter(step != "construct") %>% 
+  ggplot(aes(x = plot, y = sqrt(elapsed), color = plot, fill = plot)) + 
+  geom_col() + 
+  geom_text(aes(y = sqrt(elapsed) - 0.1, label = round(elapsed, 2)), color = "black")+ 
+  facet_wrap(vars(step), nrow = 1)  + 
+  scale_y_continuous(breaks = seq(0, 6, 1)) + 
+  labs(y = "square root of elapsed time")
+```
+
+```{r eval = FALSE}
+ggsave( 
+       filename = here::here("content/post/2022-05-21-ggplot-sf/benchplot-time.png"),
+       width = 10, height = 3.5)
+```
+
+<centre>
+![](/post/2022-05-21-ggplot-sf/benchplot-time.png)
+
+Here `p1` to `p3` is the three benchmark plots from left to right and `p4` is the target plot. Notice here on the y-axis is the **square root** of elapsed time and the text on each bar is the **actual** elapsed time. 
+
+Building and rendering time looks fine and it looks like the drawing time is [someone to blame].
+
+
+<!-- # ```{r eval = FALSE} -->
+<!-- # ind <- crossing(year = unique(combined$year)[21], n = 1:5) -->
+<!-- #  -->
+<!-- # sim_time <- map2_dfr(ind$year, ind$n, -->
+<!-- #                     ~ {print(.x); print(.y); dt <- combined %>% -->
+<!-- #                       filter(year <= .x)  -->
+<!-- #                     t <- dt %>% -->
+<!-- #                       make_plot() %>% -->
+<!-- #                       benchplot(); dev.off(); return(t %>% mutate(n = .y))}, -->
+<!-- #                     .id = "year") -->
+<!-- # save(sim_time, file = "sim_time.rda")  -->
+<!-- # ``` -->
+<!-- #  -->
+<!-- # ```{r} -->
+<!-- # load("sim_time.rda") -->
+<!-- # sim_time %>% filter(year != 21) %>%  -->
+<!-- #   mutate(year = as.numeric(year)) %>%  -->
+<!-- #   filter(step == "draw") %>% -->
+<!-- #   ggplot() +  -->
+<!-- #   geom_line(aes(x= n, y = elapsed)) -->
+<!-- # ``` -->
+
+
+
+This reminds me of the fact that if I throw an unrealistic large number of facets to ggplot and ask it to draw the plot for me, ggplot will be grumpy. Let's look at how many points we have asked it to draw. In `ggplot2::benchplot()`, `draw <- system.time(grid.draw(grob))` is used to check the drawing time and `sf` has a function `st_as_grob()` to convert the simple feature object into a grob ready for `grid.draw()` to plot: 
+
+```{r}
+grob <- sf::st_as_grob(combined$geometry)
+grob$x %>% length()
+```
+
+This is also the value of number of points in the combined data, which can be checked with `st_coordinates()`: 
+
+```{r}
+combined %>% st_coordinates() %>% nrow()
+```
+
+It looks like we are indeed being a little bit mean and are overworking ggplot. A little trick we can do here is to simplify the polygon a little bit, with `rmapshaper:: ms_simplify()`, which, by default, only keep 1 percent of the points from the polygons: 
+
+```{r results='hide'}
+ohio2 <- ohio %>% rmapshaper::ms_simplify()
+
+combined2 <- ohio2 %>% left_join(sir, by = c("NAME" = "county"))
+
+target2 <- combined2 %>% 
+  ggplot() + 
+  geom_sf(aes(fill = SIR)) +
+  facet_wrap(~year, dir = "h", ncol = 7) +
+  ggtitle("SIR") + 
+  theme_bw() +
+  theme(
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank()
+  ) +
+  scale_fill_gradient2(
+    midpoint = 1, low = "blue", mid = "white", high = "red"
+  )
+
+res <- benchplot(target2)
+```
+
+```{r}
+as_tibble(res)
+```
+
+
+```{r eval = FALSE}
+ggsave(target2,
+       filename = here::here("content/post/2022-05-21-ggplot-sf/sir2.png"),
+       width = 9, height = 5)
+```
+
+WOW, now we instantly get our plot and `benchplot()` says  
+
+And guess how the plot looks like after the simplification? 
+
+<centre>
+![](/post/2022-05-21-ggplot-sf/sir2.png)
+
+I can't even tell it from the origin plot! 
+
+So, we didn't really solve why  how to speed up the drawing of grid graphic. But at least for now, the simplification trick works for us to get away with the problem. 
+

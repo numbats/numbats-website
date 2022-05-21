@@ -1,0 +1,173 @@
+---
+title: "ggplot-sf"
+author: "H. Sherry Zhang"
+date: '2022-05-21'
+slug: []
+categories: []
+tags: []
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2022-05-21T22:49:21+10:00'
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+
+
+<p>We all see faceted plots and don’t tell me you don’t, unless you never use a calendar; We all see maps and don’t tell me you don’t, unless you never get to somewhere. Here I have an interesting observation on faceted maps for you.</p>
+<p>This example comes from <a href="https://www.paulamoraga.com/book-geospatial/sec-arealdataexamplest.html">Chapter 7 of Paula Moraga’s book Geospatial Health Data: Modeling and Visualization with R-INLA and Shiny</a> and I have simplified it for my demonstration. In essence, there are two datasets:</p>
+<ol style="list-style-type: decimal">
+<li>A map data (<code>ohio</code>) with 88 Ohio counties in an <code>sf</code> object:</li>
+</ol>
+<pre><code>## Simple feature collection with 88 features and 1 field
+## Geometry type: POLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -84.8203 ymin: 38.40342 xmax: -80.5182 ymax: 42.32713
+## Geodetic CRS:  NAD83
+## # A tibble: 88 × 2
+##    NAME                                                              geometry
+##    &lt;chr&gt;                                                        &lt;POLYGON [°]&gt;
+##  1 Auglaize   ((-84.13476 40.65755, -84.13467 40.65755, -84.13405 40.65753, …
+##  2 Crawford   ((-82.77258 40.99589, -82.77258 40.99588, -82.77168 40.99588, …
+##  3 Montgomery ((-84.06231 39.8366, -84.06301 39.83665, -84.06501 39.83677, -…
+##  4 Guernsey   ((-81.22986 40.06315, -81.22987 40.06308, -81.22992 40.06119, …
+##  5 Clark      ((-83.83875 39.8233, -83.83889 39.82335, -83.83904 39.82339, -…
+##  6 Gallia     ((-82.18737 38.72608, -82.18727 38.72558, -82.18707 38.72488, …
+##  7 Fairfield  ((-82.82307 39.80773, -82.82307 39.8078, -82.82305 39.80801, -…
+##  8 Darke      ((-84.43157 40.15801, -84.43148 40.15487, -84.43148 40.1542, -…
+##  9 Monroe     ((-81.22569 39.57838, -81.24065 39.57883, -81.2413 39.57885, -…
+## 10 Portage    ((-81.3184 40.98861, -81.31892 40.98862, -81.31927 40.98862, -…
+## # … with 78 more rows</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>A lung cancer data with standardized incidence ratios (SIRs) calculated for each county across 21 years (1968 - 1988):</li>
+</ol>
+<pre><code>## # A tibble: 1,848 × 3
+##    county  year   SIR
+##    &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
+##  1 Adams   1968 0.725
+##  2 Adams   1969 0.588
+##  3 Adams   1970 1.03 
+##  4 Adams   1971 0.654
+##  5 Adams   1972 1.05 
+##  6 Adams   1973 0.693
+##  7 Adams   1974 1.15 
+##  8 Adams   1975 1.17 
+##  9 Adams   1976 0.936
+## 10 Adams   1977 0.644
+## # … with 1,838 more rows</code></pre>
+<p>The details on calculating SIR is not particularly of our interest and Section <a href="https://www.paulamoraga.com/book-geospatial/sec-arealdataexamplest.html#sec-arealdataexamplest">7.1</a> to <a href="https://www.paulamoraga.com/book-geospatial/sec-arealdataexamplest.html#data-preparation-1">7.2</a> of the book has detailed all the steps you are interested.</p>
+<p>What we want to do here is to plot the SIR values for each county on the map across year. This would need join the two datasets (<code>left_join</code>), setup the ggplot (<code>ggplot</code>), plot the map with <code>geom_sf</code>, use <code>SIR</code> as the fill, facet the plot by <code>year</code>, and a bunch of tweak on theme and color scale:</p>
+<pre class="r"><code>combined &lt;- ohio %&gt;% 
+  left_join(sir, by = c(&quot;NAME&quot; = &quot;county&quot;))
+
+target &lt;- combined %&gt;% 
+  ggplot() + 
+  geom_sf(aes(fill = SIR)) +
+  facet_wrap(~year, dir = &quot;h&quot;, ncol = 7) +
+  ggtitle(&quot;SIR&quot;) + 
+  theme_bw() +
+  theme(
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank(),
+    axis.ticks = element_blank()
+  ) +
+  scale_fill_gradient2(
+    midpoint = 1, low = &quot;blue&quot;, mid = &quot;white&quot;, high = &quot;red&quot;
+  )</code></pre>
+<p><centre>
+<img src="/post/2022-05-21-ggplot-sf/sir.png" /></p>
+<p>Easy peasy.</p>
+<p>But, have you thought about how long it would take to render this plot you just see?</p>
+<p>Let me show you some components of this plot as benchmarks, here I have:</p>
+<ol style="list-style-type: decimal">
+<li><p><code>P1</code>: a single map object (left): <strong>0.834 secs</strong></p></li>
+<li><p><code>P2</code>: a single year (1968) with SIR filled (mid): <strong>0.903 secs</strong>, and</p></li>
+<li><p><code>P3</code>: two years (1968 &amp; 1969) with SIR filled in facets (right): <strong>1.78 secs</strong></p></li>
+</ol>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><centre>
+<img src="/post/2022-05-21-ggplot-sf/compare-benchplot.png" /></p>
+<p>okay, now it is your time to make a guess.</p>
+<ul>
+<li><p>~1 second? Ideally if the same map is copied across all the year, the increment of more facets would just be marginal.</p></li>
+<li><p>~18 seconds? The increment of rendering another facet from 2) to 3) is 0.85 (1.78-0.93) sec. Projecting that into 20 more facets will give us: 0.903 + (1.78-0.93) * 20 = 17.903 sec. </p></li>
+<li><p>30 seconds, 40 seconds, 1 minutes? I don’t know. I just run your code and have waited a while for this plot to appear.</p></li>
+</ul>
+<p>There are different ways to check the time it takes for a certain command to run and here we use <code>ggplot2::benchplot()</code>, which can break down the plot by building, rendering, and drawing:</p>
+<pre><code>## function (x) 
+## {
+##     x &lt;- enquo(x)
+##     construct &lt;- system.time(x &lt;- eval_tidy(x))
+##     if (!inherits(x, &quot;ggplot&quot;)) {
+##         abort(&quot;`x` must be a ggplot object&quot;)
+##     }
+##     build &lt;- system.time(data &lt;- ggplot_build(x))
+##     render &lt;- system.time(grob &lt;- ggplot_gtable(data))
+##     draw &lt;- system.time(grid.draw(grob))
+##     times &lt;- rbind(construct, build, render, draw)[, 1:3]
+##     times &lt;- rbind(times, colSums(times))
+##     cbind(step = c(&quot;construct&quot;, &quot;build&quot;, &quot;render&quot;, &quot;draw&quot;, &quot;TOTAL&quot;), 
+##         mat_2_df(times))
+## }
+## &lt;bytecode: 0x7fb4d48834a0&gt;
+## &lt;environment: namespace:ggplot2&gt;</code></pre>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>##        step user.self sys.self elapsed
+## 1 construct     0.000    0.000   0.000
+## 2     build     1.371    0.221   1.763
+## 3    render     0.697    0.060   0.769
+## 4      draw    30.479    0.070  30.603
+## 5     TOTAL    32.547    0.351  33.135</code></pre>
+<p>WOW, I do not expect it to take a total of 33.135 secs to render our target plot!</p>
+<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
+<p>We can take a look at the decomposition of time for the three benchmark plots before. This would give us an idea of where our target plot take long.</p>
+<p><centre>
+<img src="/post/2022-05-21-ggplot-sf/benchplot-time.png" /></p>
+<p>Here <code>p1</code> to <code>p3</code> is the three benchmark plots from left to right and <code>p4</code> is the target plot. Notice here on the y-axis is the <strong>square root</strong> of elapsed time and the text on each bar is the <strong>actual</strong> elapsed time.</p>
+<p>Building and rendering time looks fine and it looks like the drawing time is [someone to blame].</p>
+<!-- # ```{r eval = FALSE} -->
+<!-- # ind <- crossing(year = unique(combined$year)[21], n = 1:5) -->
+<!-- #  -->
+<!-- # sim_time <- map2_dfr(ind$year, ind$n, -->
+<!-- #                     ~ {print(.x); print(.y); dt <- combined %>% -->
+<!-- #                       filter(year <= .x)  -->
+<!-- #                     t <- dt %>% -->
+<!-- #                       make_plot() %>% -->
+<!-- #                       benchplot(); dev.off(); return(t %>% mutate(n = .y))}, -->
+<!-- #                     .id = "year") -->
+<!-- # save(sim_time, file = "sim_time.rda")  -->
+<!-- # ``` -->
+<!-- #  -->
+<!-- # ```{r} -->
+<!-- # load("sim_time.rda") -->
+<!-- # sim_time %>% filter(year != 21) %>%  -->
+<!-- #   mutate(year = as.numeric(year)) %>%  -->
+<!-- #   filter(step == "draw") %>% -->
+<!-- #   ggplot() +  -->
+<!-- #   geom_line(aes(x= n, y = elapsed)) -->
+<!-- # ``` -->
+<p>This reminds me of the fact that if I throw an unrealistic large number of facets to ggplot and ask it to draw the plot for me, ggplot will be grumpy. Let’s look at how many points we have asked it to draw. In <code>ggplot2::benchplot()</code>, <code>draw &lt;- system.time(grid.draw(grob))</code> is used to check the drawing time and <code>sf</code> has a function <code>st_as_grob()</code> to convert the simple feature object into a grob ready for <code>grid.draw()</code> to plot:</p>
+<pre><code>## [1] 2372979</code></pre>
+<p>This is also the value of number of points in the combined data, which can be checked with <code>st_coordinates()</code>:</p>
+<pre><code>## [1] 2372979</code></pre>
+<p>It looks like we are indeed being a little bit mean and are overworking ggplot. A little trick we can do here is to simplify the polygon a little bit, with <code>rmapshaper:: ms_simplify()</code>, which, by default, only keep 1 percent of the points from the polygons:</p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre><code>## # A tibble: 5 × 4
+##   step      user.self sys.self elapsed
+##   &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
+## 1 construct     0      0         0    
+## 2 build         1.16   0.178     1.48 
+## 3 render        0.450  0.0150    0.474
+## 4 draw          0.463  0.00800   0.479
+## 5 TOTAL         2.07   0.201     2.43</code></pre>
+<p>WOW, now we instantly get our plot and <code>benchplot()</code> says</p>
+<p>And guess how the plot looks like after the simplification?</p>
+<p><centre>
+<img src="/post/2022-05-21-ggplot-sf/sir2.png" /></p>
+<p>I can’t even tell it from the origin plot!</p>
+<p>So, we didn’t really solve why how to speed up the drawing of grid graphic. But at least for now, the simplification trick works for us to get away with the problem.</p>
