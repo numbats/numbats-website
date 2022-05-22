@@ -63,8 +63,10 @@ map &lt;- ggplot() +
                                    &quot;IND&quot;=&quot;#66b2b2&quot;,
                                    &quot;UNDEC&quot;=&quot;#808080&quot;)) +
   theme_map()
-ggplotly(map)</code></pre>
-<iframe src="https://numbat.space/post/election_hexmaps/map.html" width="750px" height="600px">
+map</code></pre>
+<p><img src="/post/election_hexmaps/election_hexmaps_files/figure-html/electoral-map-1.png" width="100%" /></p>
+<pre class="r"><code>#ggplotly(map)</code></pre>
+<p>An interactive version can be found <a href="https://numbat.space/post/election_hexmaps/map.html">here</a>.</p>
 <p>The map is blue – it looks like the coalition won the election in a landslide, doesn’t it! (Please note the strange shape of the Cape of York is from the AEC spatial polygons provided! It is not due the the polygon thinning.)</p>
 <p>To convert this into a hexmap, automatically with sugarbag, we need to</p>
 <ol style="list-style-type: decimal">
@@ -122,7 +124,9 @@ hexmap &lt;- ggplot() +
                                  &quot;IND&quot;=&quot;#66b2b2&quot;,
                                  &quot;UNDEC&quot;=&quot;#808080&quot;)) +
   theme_map()
-#ggplotly(hexmap)</code></pre>
+hexmap</code></pre>
+<p><img src="/post/election_hexmaps/election_hexmaps_files/figure-html/hexmap-1.png" width="100%" /></p>
+<pre class="r"><code>#ggplotly(hexmap)</code></pre>
 <p>An interactive version can be found <a href="https://numbat.space/post/election_hexmaps/hexmap.html">here</a></p>
 <p>And that’s it! The sugarbag hexmap will expand the densely populated small areas outwards, while maintaining proximity to neighbouring electorates and to the city centre. It is a type of <a href="https://en.wikipedia.org/wiki/Cartogram">cartogram algorithm</a> with two important differences: (1) uses equal area for each hexagon instead of sized proportional to population, and (2) allows some hexagons to be separated so that the geographic positions are reasonably preserved.</p>
 <p>The hexmap makes it easier to see the results distributed across the country, and clearly with the predominance of red, that Labor won.</p>

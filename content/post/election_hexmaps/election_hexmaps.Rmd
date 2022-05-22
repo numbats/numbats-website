@@ -74,6 +74,7 @@ map <- ggplot() +
                                    "IND"="#66b2b2",
                                    "UNDEC"="#808080")) +
   theme_map()
+map
 #ggplotly(map)
 ```
 
@@ -138,6 +139,7 @@ hexmap <- ggplot() +
                                  "IND"="#66b2b2",
                                  "UNDEC"="#808080")) +
   theme_map()
+hexmap
 #ggplotly(hexmap)
 ```
 
