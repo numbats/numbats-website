@@ -19,10 +19,11 @@ tags:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
-  echo = FALSE,
-  message = FALSE,
-  error = FALSE,
-  warning = FALSE)
+	echo = FALSE,
+	error = FALSE,
+	message = FALSE,
+	warning = FALSE
+)
 ```
 
 Australia is a land of wide open spaces where the population concentrates in small areas. It can make for misleading map visualisations on statistics related to people. The May 20, 2022 ABC article [The Australian election map has been lying to you](https://www.abc.net.au/news/2022-05-20/federal-election-map-lying/101076016) explains this very neatly. It has alsp provided a better alternative to examine election results, in the form of a hexmap of Australia. The hexmap provided in the article is almost certainly manually constructed which is find for a construct once, use many times purpose. 
@@ -75,6 +76,8 @@ map <- ggplot() +
   theme_map()
 ggplotly(map)
 ```
+
+<iframe src="https://numbat.space/post/election_hexmaps/map.html">
 
 The map is blue -- it looks like the coalition won the election in a landslide, doesn't it! (Please note the strange shape of the Cape of York is from the AEC spatial polygons provided! It is not due the the polygon thinning.)
 
@@ -138,10 +141,12 @@ hexmap <- ggplot() +
 ggplotly(hexmap)
 ```
 
+<iframe src="https://numbat.space/post/election_hexmaps/hexmap.html">
+
 And that's it! The sugarbag hexmap will expand the densely populated small areas outwards, while maintaining proximity to neighbouring electorates and to the city centre. It is a type of [cartogram algorithm](https://en.wikipedia.org/wiki/Cartogram) with two important differences: (1) uses equal area for each hexagon instead of sized proportional to population, and (2) allows some hexagons to be separated so that the geographic positions are reasonably preserved. 
 
 The hexmap makes it easier to see the results distributed across the country, and clearly with the predominance of red, that Labor won. 
 
-Data for this post can be found [here](post/election_hexmaps/electoral_2022.csv).
+Data for this post can be found [here](https://numbat.space/post/election_hexmaps/electoral_2022.csv).
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
