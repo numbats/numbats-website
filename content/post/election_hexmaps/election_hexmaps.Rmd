@@ -29,7 +29,7 @@ knitr::opts_chunk$set(
 
 Australia is a land of wide open spaces where the population concentrates in small areas. It can make for misleading map visualisations on statistics related to people. The May 20, 2022 ABC article [The Australian election map has been lying to you](https://www.abc.net.au/news/2022-05-20/federal-election-map-lying/101076016) explains this very neatly. It has alsp provided a better alternative to examine election results, in the form of a hexmap of Australia. The hexmap provided in the article is almost certainly manually constructed which is find for a construct once, use many times purpose. 
 
-When you want to be able to make a hexmap on new spatial data or if the spatial groups change, the R package sugarbag can be helpful. This post explains how to do this, using the results as we have them today from yesterday's election. (We'll update these once the final results are released.)
+When you want to be able to make a hexmap on new spatial data or if the spatial groups change, the R package sugarbag can be helpful.  This post explains how to do this, using the results as we have them today from yesterday's election. (We'll update these once the final results are released.)
 
 Here's how to get started. Download the current spatial boundaries for electorates, from [Australian Electoral Commission web site](https://www.aec.gov.au/Electorates/maps.htm).
 
