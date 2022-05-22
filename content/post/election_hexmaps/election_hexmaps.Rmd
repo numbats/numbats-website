@@ -22,7 +22,8 @@ knitr::opts_chunk$set(
 	echo = FALSE,
 	error = FALSE,
 	message = FALSE,
-	warning = FALSE
+	warning = FALSE,
+	cache = TRUE
 )
 ```
 
