@@ -74,10 +74,10 @@ map <- ggplot() +
                                    "IND"="#66b2b2",
                                    "UNDEC"="#808080")) +
   theme_map()
-ggplotly(map)
+#ggplotly(map)
 ```
 
-<iframe src="https://numbat.space/post/election_hexmaps/map.html">
+An interactive version can be found  [here](https://numbat.space/post/election_hexmaps/map.html).
 
 The map is blue -- it looks like the coalition won the election in a landslide, doesn't it! (Please note the strange shape of the Cape of York is from the AEC spatial polygons provided! It is not due the the polygon thinning.)
 
@@ -138,10 +138,10 @@ hexmap <- ggplot() +
                                  "IND"="#66b2b2",
                                  "UNDEC"="#808080")) +
   theme_map()
-ggplotly(hexmap)
+#ggplotly(hexmap)
 ```
 
-<iframe src="https://numbat.space/post/election_hexmaps/hexmap.html">
+An interactive version can be found  [here](https://numbat.space/post/election_hexmaps/hexmap.html)
 
 And that's it! The sugarbag hexmap will expand the densely populated small areas outwards, while maintaining proximity to neighbouring electorates and to the city centre. It is a type of [cartogram algorithm](https://en.wikipedia.org/wiki/Cartogram) with two important differences: (1) uses equal area for each hexagon instead of sized proportional to population, and (2) allows some hexagons to be separated so that the geographic positions are reasonably preserved. 
 
