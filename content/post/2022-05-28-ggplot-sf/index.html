@@ -25,8 +25,8 @@ projects: []
 
 
 
-<p>If you’re a ggplot user, faceted plots must be under your belt. If you happen to do some spatial analysis, you can’t be more familiar with maps. Today, I will show you my findings on the rendering time of faceted map.</p>
-<p>This example comes from <a href="https://www.paulamoraga.com/book-geospatial/sec-arealdataexamplest.html">Chapter 7</a> of Paula Moraga’s book <em>Geospatial Health Data: Modeling and Visualization with R-INLA and Shiny</em> and I have simplified it for my demonstration. In essence, there are two datasets:</p>
+<p>If you’re a ggplot user, making faceted plots must be a tool in your belt. If you happen to do some spatial analysis, you would be familiar with maps. Today, I will show you my surprise findings about the rendering time to make faceted maps.</p>
+<p>This example comes from <a href="https://www.paulamoraga.com/book-geospatial/sec-arealdataexamplest.html">Chapter 7</a> of Paula Moraga’s book <em>Geospatial Health Data: Modeling and Visualization with R-INLA and Shiny</em> and I have simplified it for this demonstration. In essence, there are two datasets:</p>
 <ol style="list-style-type: decimal">
 <li>Map data (<code>ohio</code>) with 88 Ohio counties in an <code>sf</code> object:</li>
 </ol>
@@ -66,7 +66,7 @@ projects: []
 ##  9 Adams   1976 0.936
 ## 10 Adams   1977 0.644
 ## # … with 1,838 more rows</code></pre>
-<p>The details on calculating SIR is not the focus of this post and Section <a href="https://www.paulamoraga.com/book-geospatial/sec-arealdataexamplest.html#sec-arealdataexamplest">7.1</a> to <a href="https://www.paulamoraga.com/book-geospatial/sec-arealdataexamplest.html#data-preparation-1">7.2</a> of Paula’s book has detailed all the steps you need if interested. Here I attach the script to generate these two data in case you would like to give it a spin:</p>
+<p>The details on calculating SIR is not the focus of this post and Section <a href="https://www.paulamoraga.com/book-geospatial/sec-arealdataexamplest.html#sec-arealdataexamplest">7.1</a> to <a href="https://www.paulamoraga.com/book-geospatial/sec-arealdataexamplest.html#data-preparation-1">7.2</a> of Paula’s book has detailed all the steps. Here I attach the script to generate these two data sets in case you would like to give it a spin:</p>
 <details>
 <summary>
 script
@@ -105,7 +105,7 @@ sir &lt;- tibble(county = countiesE, year = yearsE, E = E) %&gt;%
   mutate(SIR = Y/E) %&gt;% 
   select(county, year, SIR)</code></pre>
 </details>
-<p>What we would like to do here is to show those SIR values of each county on the map across year. This would require us to join the two datasets, supply the combined data into ggplot, plot the underlying map, fill the county polygon with <code>SIR</code>, make facets with <code>year</code>, and lastly add a few tweaks on theme and the scale of fill. Let’s give this plot a name, say <code>target</code>:</p>
+<p>What we would like to do here is to show the SIR values of each county on the map across years. This would require us to join the two datasets, supply the combined data into ggplot, plot the underlying map, fill the county polygon with <code>SIR</code>, make facets with <code>year</code>, and lastly tweak the theme and the fill scale. Let’s give this plot a name, say <code>target</code>:</p>
 <pre class="r"><code>combined &lt;- ohio %&gt;% 
   left_join(sir, by = c(&quot;NAME&quot; = &quot;county&quot;))
 
@@ -127,15 +127,15 @@ target &lt;- combined %&gt;%
 target</code></pre>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Easy peasy.</p>
-<p>But, have you thought about how long it would take to bring this plot to you?</p>
-<p>Let me show you some components of this plot as benchmarks, here I have:</p>
+<p>But, have you thought about <strong>how long it would take to provide this plot to you?</strong></p>
+<p>Let me show you some components of this plot as benchmarks on the timing, here I have:</p>
 <ol style="list-style-type: decimal">
 <li><p><code>P0</code>: a single map object (left): <strong>0.806 secs</strong></p></li>
 <li><p><code>P1</code>: a single year (1968) with SIR filled (mid): <strong>0.902 secs</strong>, and</p></li>
 <li><p><code>P2</code>: two years (1968 &amp; 1969) with SIR filled in facets (right): <strong>1.638 secs</strong></p></li>
 </ol>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-11-1.png" width="960" style="display: block; margin: auto;" /></p>
-<p>okay, now it is your time to make a guess:</p>
+<p><strong>Okay, now it is your time to make a guess:</strong></p>
 <ul>
 <li><p>~1 or 2 seconds? Ideally if the same map is rendered in parallel across all the facets, the increment of time would be marginal.</p></li>
 <li><p>~16 seconds? The increment of rendering another facet from 2) to 3) is 0.736 (1.638-0.902) seconds. Projecting that into 20 more facets will give us: 0.902 + (1.638-0.902) * 20 = 16.358 seconds.</p></li>
@@ -159,7 +159,7 @@ target</code></pre>
 ##     cbind(step = c(&quot;construct&quot;, &quot;build&quot;, &quot;render&quot;, &quot;draw&quot;, &quot;TOTAL&quot;), 
 ##         mat_2_df(times))
 ## }
-## &lt;bytecode: 0x114df5330&gt;
+## &lt;bytecode: 0x14a18a278&gt;
 ## &lt;environment: namespace:ggplot2&gt;</code></pre>
 <p>Ready for the answer? Here you go:</p>
 <pre class="r"><code>benchplot(target)</code></pre>
@@ -169,14 +169,14 @@ target</code></pre>
 ## 3    render     0.707    0.055   0.774
 ## 4      draw    25.914    0.067  25.975
 ## 5     TOTAL    27.910    0.172  28.085</code></pre>
-<p>WOW, I do not expect it to take 28.085 seconds to get our plot!</p>
+<p>WOW, I did not expect it to take 28.085 seconds to get my plot!</p>
 </div>
 <div id="how-come-it-takes-that-long" class="section level3">
 <h3>How come it takes that long?</h3>
-<p>We can take a look at the time decomposition of our target plot along with the three benchmark plots. This would tell us at which stage our target plot takes long:</p>
+<p>We can take a look at the time decomposition of our target plot construction along with the three benchmark plots. This would tell us at which stage our target plot takes the longest:</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-15-1.png" width="960" style="display: block; margin: auto;" /></p>
 <p>Here <code>p0</code> to <code>p2</code> are the three benchmark plots and <code>p21</code> is the target plot (since it has 21 facets). Notice the y-axis is the <strong>square root</strong> of elapsed time and the text on each bar is the <strong>actual</strong> elapsed time.</p>
-<p>Building and rendering times look fine, but our target plot is taking a considerable large amount of time in the drawing. Looking back into <code>benchplot()</code>, the drawing time is calculated as the time of <code>grid.draw()</code> drawing the grob:</p>
+<p>Building and rendering times look fine, but our target plot is taking a considerably large amount of time in the <strong>drawing</strong>. Looking back into <code>benchplot()</code>, the drawing time is calculated as the time of <code>grid.draw()</code> drawing the grob:</p>
 <pre class="r"><code>draw &lt;- system.time(grid.draw(grob))</code></pre>
 <p>We could also do an experiment to progressively add facets to see how the drawing time changes as there are more facets. Here I start with <code>p1</code> containing only year 1968 and <code>p2</code> containing year 1968 &amp; 1969, and add one more year at a time till <code>p21</code>, which contains all the 21 years from 1968 to 1988. Here is the script I used to make the simulation:</p>
 <pre class="r"><code>combined &lt;- ohio %&gt;% left_join(sir, by = c(&quot;NAME&quot; = &quot;county&quot;)) 
@@ -213,22 +213,22 @@ time_all &lt;- map_dfr(year, function(y){
 <p>Note that the workhorse, <code>out &lt;- dt %&gt;% bench_plot()</code>, is wrapped in between <code>dev.new()</code> and
 <code>while (dev.cur()&gt;1) dev.off()</code> so that a clean canvas is set up before each evaluation and closed after. Now we can plot the result and take a look:</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>The three dotted vertical lines are where a new row takes place in the facet. The dashed line connects <code>p1</code> and <code>p2</code> and shows how the elapsed time would be if a linear interpolation between <code>p1</code> and <code>p2</code> is followed. Unfortunately, This is not the case from our plot.</p>
-<p>Looking at these points, something wired is going on here: by the end of the first row, the increment from having six facets (<code>p6</code>) to seven facets (<code>p7</code>) is much larger than those in early plots (<code>p1</code> to <code>p5</code>). However, the end of the second row tells us something else: the increment from having 13 facets (<code>p13</code>) to 14 facets (<code>p14</code>) is almost negligible. This is also the case at the end of the third row (<code>p20</code> and <code>p21</code>)<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<p>The three dotted vertical lines are where a new row takes place in the facet. The dashed line connects <code>p1</code> and <code>p2</code> and shows how the elapsed time would be if a <strong>linear interpolation</strong> between <code>p1</code> and <code>p2</code> is followed. <strong>Unfortunately, This is not the case from our plot.</strong></p>
+<p>Looking at these points, something weird is going on here: by the end of the first row, the increment from having six facets (<code>p6</code>) to seven facets (<code>p7</code>) is much larger than those in early plots (<code>p1</code> to <code>p5</code>). However, the end of the second row tells us something else: the increment from having 13 facets (<code>p13</code>) to 14 facets (<code>p14</code>) is almost negligible. This is also the case at the end of the third row (<code>p20</code> and <code>p21</code>)<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
 </div>
 <div id="back-to-the-initial-problem" class="section level3">
 <h3>Back to the initial problem</h3>
-<p>While I can’t find the answer of why the drawing time with additional facets has such a pattern, what initially annoys me was it takes much longer than I expected to create the target plot. If we only want to cut the run time, there is always the trick of simplifying your map object. Applying <code>rmapshaper:: ms_simplify()</code> on <code>ohio</code> will keep 1% of the points in the polygons by default and it can instantly bring the rendering time of our target plot down to 0.879 seconds:</p>
+<p>While I don’t know the answer of why the drawing time with additional facets has such a pattern, what initially annoys me was it takes much longer than I expected to create the target plot. If we only want to cut the run time, there is always the trick of simplifying your map object. Applying <code>rmapshaper:: ms_simplify()</code> on <code>ohio</code> will keep 1% of the points in the polygons by default and it can instantly bring the rendering time of our target plot down to 0.943 seconds:</p>
 <pre class="r"><code>ohio2 &lt;- ohio %&gt;% rmapshaper::ms_simplify()
 combined2 &lt;- ohio2 %&gt;% left_join(sir, by = c(&quot;NAME&quot; = &quot;county&quot;))
 target2 &lt;- combined2 %&gt;% make_plot()
 benchplot(target2)</code></pre>
 <pre><code>##        step user.self sys.self elapsed
 ## 1 construct     0.000    0.000   0.000
-## 2     build     0.587    0.014   0.605
-## 3    render     0.178    0.005   0.183
-## 4      draw     0.090    0.001   0.091
-## 5     TOTAL     0.855    0.020   0.879</code></pre>
+## 2     build     0.635    0.013   0.651
+## 3    render     0.192    0.005   0.197
+## 4      draw     0.094    0.000   0.095
+## 5     TOTAL     0.921    0.018   0.943</code></pre>
 <p>And how does the plot look like after the simplification?</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>At least I can’t tell it from the original plot.</p>

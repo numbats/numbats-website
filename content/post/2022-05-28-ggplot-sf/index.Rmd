@@ -36,7 +36,7 @@ library(patchwork)
 library(ggtext)
 ```
 
-If you're a ggplot user, faceted plots must be under your belt. If you happen to do some spatial analysis, you can't be more familiar with maps. Today, I will show you my findings on the rendering time of faceted map. 
+If you're a ggplot user, making faceted plots must be a tool in your belt. If you happen to do some spatial analysis, you would be familiar with maps. Today, I will show you my surprise findings about the rendering time to make faceted maps. 
 
 ```{r}
 ohio <- read_sf(system.file("SpatialEpiApp/data/Ohio/fe_2007_39_county/fe_2007_39_county.shp", 
@@ -44,7 +44,7 @@ ohio <- read_sf(system.file("SpatialEpiApp/data/Ohio/fe_2007_39_county/fe_2007_3
   select(NAME, geometry)
 ```
 
-This example comes from [Chapter 7](https://www.paulamoraga.com/book-geospatial/sec-arealdataexamplest.html) of Paula Moraga's book *Geospatial Health Data: Modeling and Visualization with R-INLA and Shiny* and I have simplified it for my demonstration. In essence, there are two datasets: 
+This example comes from [Chapter 7](https://www.paulamoraga.com/book-geospatial/sec-arealdataexamplest.html) of Paula Moraga's book *Geospatial Health Data: Modeling and Visualization with R-INLA and Shiny* and I have simplified it for this demonstration. In essence, there are two datasets: 
 
 1. Map data (`ohio`) with `r nrow(ohio)` Ohio counties in an `sf` object: 
 
@@ -82,7 +82,7 @@ sir <- tibble(county = countiesE, year = yearsE, E = E) %>%
 sir
 ```
 
-The details on calculating SIR is not the focus of this post and Section [7.1](https://www.paulamoraga.com/book-geospatial/sec-arealdataexamplest.html#sec-arealdataexamplest) to [7.2](https://www.paulamoraga.com/book-geospatial/sec-arealdataexamplest.html#data-preparation-1) of Paula's book has detailed all the steps you need if interested. Here I attach the script to generate these two data in case you would like to give it a spin:
+The details on calculating SIR is not the focus of this post and Section [7.1](https://www.paulamoraga.com/book-geospatial/sec-arealdataexamplest.html#sec-arealdataexamplest) to [7.2](https://www.paulamoraga.com/book-geospatial/sec-arealdataexamplest.html#data-preparation-1) of Paula's book has detailed all the steps. Here I attach the script to generate these two data sets in case you would like to give it a spin:
 
 <details><summary>script</summary>
 
@@ -124,7 +124,7 @@ sir <- tibble(county = countiesE, year = yearsE, E = E) %>%
 
 </details>
 
-What we would like to do here is to show those SIR values of each county on the map across year. This would require us to join the two datasets, supply the combined data into ggplot, plot the underlying map, fill the county polygon with `SIR`,  make facets with `year`, and lastly add a few tweaks on theme and the scale of fill. Let's give this plot a name, say `target`: 
+What we would like to do here is to show the SIR values of each county on the map across years. This would require us to join the two datasets, supply the combined data into ggplot, plot the underlying map, fill the county polygon with `SIR`,  make facets with `year`, and lastly tweak the theme and the fill scale. Let's give this plot a name, say `target`: 
 
 ```{r echo = TRUE}
 combined <- ohio %>% 
@@ -150,7 +150,7 @@ target
 
 Easy peasy. 
 
-But, have you thought about how long it would take to bring this plot to you?
+But, have you thought about **how long it would take to provide this plot to you?**
 
 ```{r}
 combined <- ohio %>% left_join(sir, by = c("NAME" = "county")) 
@@ -217,7 +217,7 @@ save(time, file = here::here("content/post/2022-05-21-ggplot-sf/time.rda"))
 load("time.rda")
 ```
 
-Let me show you some components of this plot as benchmarks, here I have: 
+Let me show you some components of this plot as benchmarks on the timing, here I have: 
 
   1) `P0`: a single map object (left): **`r get_total(time$dt1)` secs**
   
@@ -245,7 +245,7 @@ p7 <- dt3 %>%
   theme(legend.position='right')  
 ```
 
-okay, now it is your time to make a guess: 
+**Okay, now it is your time to make a guess:** 
 
  - ~1 or 2 seconds? Ideally if the same map is rendered in parallel across all the facets, the increment of time would be marginal. 
  
@@ -271,11 +271,11 @@ benchplot(target)
 time$dt4
 ```
 
-WOW, I do not expect it to take `r round(get_total(time$dt4), 5)` seconds to get our plot! 
+WOW, I did not expect it to take `r round(get_total(time$dt4), 5)` seconds to get my plot! 
 
 ### How come it takes that long? 
 
-We can take a look at the time decomposition of our target plot along with the three benchmark plots. This would tell us at which stage our target plot takes long: 
+We can take a look at the time decomposition of our target plot construction along with the three benchmark plots. This would tell us at which stage our target plot takes the longest: 
 
 ```{r fig.width=10, fig.height=3.5}
 dt <- do.call(bind_rows, time) %>% 
@@ -297,7 +297,7 @@ dt %>%
 
 Here `p0` to `p2` are the three benchmark plots and `p21` is the target plot (since it has 21 facets). Notice the y-axis is the **square root** of elapsed time and the text on each bar is the **actual** elapsed time. 
 
-Building and rendering times look fine, but our target plot is taking a considerable large amount of time in the drawing. Looking back into `benchplot()`, the drawing time is calculated as the time of `grid.draw()` drawing the grob: 
+Building and rendering times look fine, but our target plot is taking a considerably large amount of time in the **drawing**. Looking back into `benchplot()`, the drawing time is calculated as the time of `grid.draw()` drawing the grob: 
 
 ```{r eval = FALSE, echo = TRUE}
 draw <- system.time(grid.draw(grob))
@@ -366,9 +366,9 @@ dat %>%
   theme_bw()
 ```   
 
-The three dotted vertical lines are where a new row takes place in the facet. The dashed line connects `p1` and `p2` and shows how the elapsed time would be if a linear interpolation between `p1` and `p2` is followed. Unfortunately, This is not the case from our plot.
+The three dotted vertical lines are where a new row takes place in the facet. The dashed line connects `p1` and `p2` and shows how the elapsed time would be if a **linear interpolation** between `p1` and `p2` is followed. **Unfortunately, This is not the case from our plot.**
 
-Looking at these points, something wired is going on here: by the end of the first row, the increment from having six facets (`p6`) to seven facets (`p7`) is much larger than those in early plots (`p1` to `p5`). However, the end of the second row tells us something else: the increment from having 13 facets (`p13`) to 14 facets (`p14`) is almost negligible. This is also the case at the end of the third row (`p20` and `p21`)[^1].
+Looking at these points, something weird is going on here: by the end of the first row, the increment from having six facets (`p6`) to seven facets (`p7`) is much larger than those in early plots (`p1` to `p5`). However, the end of the second row tells us something else: the increment from having 13 facets (`p13`) to 14 facets (`p14`) is almost negligible. This is also the case at the end of the third row (`p20` and `p21`)[^1].
 
 [^1]: To make a proper benchmark of time, ideally each plot (`p1` - `p21`) should be evaluated repetitively to obtain a distribution of the elapsed time. I set up a script with 50 repetitions and let it run overnight, but what I got next morning was "RStudio quit unexpectedly". I suspect there is something going on with opening and closing the graphic devices too many times...
 
@@ -399,7 +399,9 @@ while (dev.cur()>1) dev.off()
 
 ### Back to the initial problem
 
-While I can't find the answer of why the drawing time with additional facets has such a pattern, what initially annoys me was it takes much longer than I expected to create the target plot. If we only want to cut the run time, there is always the trick of simplifying your map object. Applying `rmapshaper:: ms_simplify()` on `ohio` will keep 1% of the points in the polygons by default and it can instantly bring the rendering time of our target plot down to `r get_total(res)` seconds: 
+While I don't know the answer of why the drawing time with additional facets has such a pattern, what initially annoyed me was it takes much longer than I expected to create the target plot. 
+
+**If we only want to cut the run time, there is always the trick of simplifying your map object.** Applying `rmapshaper:: ms_simplify()` on `ohio` will keep 1% of the points in the polygons by default and it can instantly bring the rendering time of our target plot down to `r get_total(res)` seconds: 
 
 ```{r eval = FALSE, echo = TRUE}
 ohio2 <- ohio %>% rmapshaper::ms_simplify()
@@ -420,6 +422,6 @@ target2
 
 At least I can't tell it from the original plot. 
 
-Hopefully, you're as surprised as I do when first knowing how long it takes to render our facet map. We find that it is the drawing time that takes the majority of the time to create the plot and the time required to draw more facet is not a linear increase of the initial two facets. However, technically, we didn't answer the question of why it takes that long to render the target plot or what `grid.draw()` is doing when plotting the facets. But even if we can't answer it, a fast rendering is still available if we remember map simplification.
+Possibly, you're as surprised as I do when first knowing how long it takes to render our facet map. We find that it is the drawing time that takes the majority of the time to create the plot and the time required to draw more facet is not a linear increase of the initial two facets. However, technically, we didn't answer the question of why it takes that long to render the target plot or what `grid.draw()` is doing when plotting the facets. But even if we can't answer it, a fast rendering is still available if we remember map simplification.
 
 
