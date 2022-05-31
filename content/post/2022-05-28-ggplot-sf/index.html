@@ -1,14 +1,20 @@
 ---
 title: "How long do maps on ggplot facets take?"
-author: "H. Sherry Zhang"
-date: '2022-05-21'
+authors: 
+  - H. Sherry Zhang
+date: '2022-05-27'
 slug: []
-categories: []
-tags: []
+categories:
+  - data visualisation
+  - teaching
+  - spatial data
+tags:
+  - R
+  - teaching
+  - data visualisation
 subtitle: ''
 summary: ''
-authors: []
-lastmod: '2022-05-21T22:49:21+10:00'
+lastmod: '2022-05-28T22:49:21+10:00'
 featured: no
 image:
   caption: ''
@@ -153,7 +159,7 @@ target</code></pre>
 ##     cbind(step = c(&quot;construct&quot;, &quot;build&quot;, &quot;render&quot;, &quot;draw&quot;, &quot;TOTAL&quot;), 
 ##         mat_2_df(times))
 ## }
-## &lt;bytecode: 0x7ff5cc7e5050&gt;
+## &lt;bytecode: 0x114df5330&gt;
 ## &lt;environment: namespace:ggplot2&gt;</code></pre>
 <p>Ready for the answer? Here you go:</p>
 <pre class="r"><code>benchplot(target)</code></pre>
@@ -212,17 +218,17 @@ time_all &lt;- map_dfr(year, function(y){
 </div>
 <div id="back-to-the-initial-problem" class="section level3">
 <h3>Back to the initial problem</h3>
-<p>While I can’t find the answer of why the drawing time with additional facets has such a pattern, what initially annoys me was it takes much longer than I expected to create the target plot. If we only want to cut the run time, there is always the trick of simplifying your map object. Applying <code>rmapshaper:: ms_simplify()</code> on <code>ohio</code> will keep 1% of the points in the polygons by default and it can instantly bring the rendering time of our target plot down to 1.701 seconds:</p>
+<p>While I can’t find the answer of why the drawing time with additional facets has such a pattern, what initially annoys me was it takes much longer than I expected to create the target plot. If we only want to cut the run time, there is always the trick of simplifying your map object. Applying <code>rmapshaper:: ms_simplify()</code> on <code>ohio</code> will keep 1% of the points in the polygons by default and it can instantly bring the rendering time of our target plot down to 0.879 seconds:</p>
 <pre class="r"><code>ohio2 &lt;- ohio %&gt;% rmapshaper::ms_simplify()
 combined2 &lt;- ohio2 %&gt;% left_join(sir, by = c(&quot;NAME&quot; = &quot;county&quot;))
 target2 &lt;- combined2 %&gt;% make_plot()
 benchplot(target2)</code></pre>
 <pre><code>##        step user.self sys.self elapsed
 ## 1 construct     0.000    0.000   0.000
-## 2     build     1.063    0.017   1.106
-## 3    render     0.392    0.006   0.399
-## 4      draw     0.181    0.001   0.196
-## 5     TOTAL     1.636    0.024   1.701</code></pre>
+## 2     build     0.587    0.014   0.605
+## 3    render     0.178    0.005   0.183
+## 4      draw     0.090    0.001   0.091
+## 5     TOTAL     0.855    0.020   0.879</code></pre>
 <p>And how does the plot look like after the simplification?</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>At least I can’t tell it from the original plot.</p>
