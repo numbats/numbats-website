@@ -420,7 +420,7 @@ And how does the plot look like after the simplification?
 target2
 ```
 
-At least I can't tell it from the original plot. 
+At least I can't tell the difference between this and the original plot. 
 
 **Possibly, you're as surprised as I was when first seeing how long it takes to render our facetted map. We find that it is the drawing time that takes the majority of the time to create the plot and the time required to draw more facet is not a linear increase of the initial two facets.** However, technically, we didn't answer the question of why it takes that long to render the target plot or what `grid.draw()` is doing when plotting the facets. But even if we can't answer it, a fast rendering is still available if we **remember map simplification. Map simplication is a simple strategy to handle plotting spatial data efficiently, and effectively.** 
 

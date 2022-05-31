@@ -159,7 +159,7 @@ target</code></pre>
 ##     cbind(step = c(&quot;construct&quot;, &quot;build&quot;, &quot;render&quot;, &quot;draw&quot;, &quot;TOTAL&quot;), 
 ##         mat_2_df(times))
 ## }
-## &lt;bytecode: 0x148ac5438&gt;
+## &lt;bytecode: 0x12cf43238&gt;
 ## &lt;environment: namespace:ggplot2&gt;</code></pre>
 <p>Ready for the answer? Here you go:</p>
 <pre class="r"><code>benchplot(target)</code></pre>
@@ -219,21 +219,21 @@ time_all &lt;- map_dfr(year, function(y){
 <div id="back-to-the-initial-problem" class="section level3">
 <h3>Back to the initial problem</h3>
 <p>While I don’t know the answer of why the drawing time with additional facets has such a pattern, what initially annoyed me was it takes much longer than I expected to create the target plot.</p>
-<p><strong>If we only want to cut the run time, there is always the trick of simplifying your map object.</strong> Applying <code>rmapshaper:: ms_simplify()</code> on <code>ohio</code> will keep 1% of the points in the polygons by default and it can instantly bring the rendering time of our target plot down to 0.908 seconds:</p>
+<p><strong>If we only want to cut the run time, there is always the trick of simplifying your map object.</strong> Applying <code>rmapshaper:: ms_simplify()</code> on <code>ohio</code> will keep 1% of the points in the polygons by default and it can instantly bring the rendering time of our target plot down to 0.891 seconds:</p>
 <pre class="r"><code>ohio2 &lt;- ohio %&gt;% rmapshaper::ms_simplify()
 combined2 &lt;- ohio2 %&gt;% left_join(sir, by = c(&quot;NAME&quot; = &quot;county&quot;))
 target2 &lt;- combined2 %&gt;% make_plot()
 benchplot(target2)</code></pre>
 <pre><code>##        step user.self sys.self elapsed
 ## 1 construct     0.000    0.000   0.000
-## 2     build     0.601    0.016   0.616
-## 3    render     0.190    0.005   0.197
-## 4      draw     0.094    0.001   0.095
-## 5     TOTAL     0.885    0.022   0.908</code></pre>
+## 2     build     0.600    0.014   0.614
+## 3    render     0.180    0.005   0.185
+## 4      draw     0.091    0.001   0.092
+## 5     TOTAL     0.871    0.020   0.891</code></pre>
 <p>And how does the plot look like after the simplification?</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>At least I can’t tell it from the original plot.</p>
-<p><strong>Possibly, you’re as surprised as I was when first seeing how long it takes to render our facet map. We find that it is the drawing time that takes the majority of the time to create the plot and the time required to draw more facet is not a linear increase of the initial two facets.</strong> However, technically, we didn’t answer the question of why it takes that long to render the target plot or what <code>grid.draw()</code> is doing when plotting the facets. But even if we can’t answer it, a fast rendering is still available if we <strong>remember map simplification</strong>.</p>
+<p><strong>Possibly, you’re as surprised as I was when first seeing how long it takes to render our facetted map. We find that it is the drawing time that takes the majority of the time to create the plot and the time required to draw more facet is not a linear increase of the initial two facets.</strong> However, technically, we didn’t answer the question of why it takes that long to render the target plot or what <code>grid.draw()</code> is doing when plotting the facets. But even if we can’t answer it, a fast rendering is still available if we <strong>remember map simplification. Map simplication is a simple strategy to handle plotting spatial data efficiently, and effectively.</strong></p>
 </div>
 <div class="footnotes footnotes-end-of-document">
 <hr />
