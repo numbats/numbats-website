@@ -16,8 +16,8 @@ height = ""
 # Slides.
 # Duplicate an `[[item]]` block to add more slides.
 [[item]]
-  title = "Congratulations to Dr Sayani Gupta!"
-  content = ":smile: Sayani was awarded her doctorate for her thesis research titled 'Visualization and analysis of probability distributions of large temporal data'"
+  title = "Welcome to Kate Saunders and Jayani Lakshika!"
+  content = ":smile: We're excited to welcome Kate to our faculty, based at Caulfield and new PhD student Jayani! And sadly farewell to Dan Simpson, good luck in your new endeavours."
   align = "center"  # Choose `center`, `left`, or `right`.
   
   # Overlay a color or image (optional).
