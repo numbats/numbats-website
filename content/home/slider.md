@@ -28,7 +28,7 @@ height = ""
    # Call to action button (optional).
    #   Activate the button by specifying a URL and button label below.
    #   Deactivate by commenting out parameters, prefixing lines with `#`.
-   cta_label = "Find out more"
+   cta_label = "More information about WOMBAT 2022 is here"
    cta_url = "https://numbats.github.io/WOMBAT2022/"
 
 [[item]]
