@@ -93,7 +93,7 @@ address = {street = "Monash University, Clayton Campus, Wellington Rd", city = "
 coordinates = {latitude = "-37.912358", longitude = "145.133055"}
 
 # Directions for visitors to locate you.
-directions = "Enter Menzies Building, go to Level 7, east corridor."
+directions = "Enter Education Building, we are located primarily on level 3, and to the east."
 
 # Office hours
 # A list of your office hours. To remove, set to an empty list `[]`.
