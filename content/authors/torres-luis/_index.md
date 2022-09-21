@@ -21,5 +21,5 @@ interests:
 - astrostatistics
 user_groups:
 - Postdoc
-- Current
+- Alumni
 ---

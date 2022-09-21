@@ -28,5 +28,5 @@ interests:
 - data science
 user_groups:
 - PhD Student
-- Current
+- Alumni
 ---
