@@ -8,8 +8,8 @@ links:
 - icon: github
   icon_pack: fab
   name: Github
-  url: https://numbats.github.io/WOMBAT2022/
-summary: Workshop Organised by the Monash Business Analytics Team 2022: Communicating with Data
+  url: https://numbats.github.io/WOMBAT2022
+summary: Workshop Organised by the Monash Business Analytics Team 2022 Communicating with Data
 tags:
 - data science
 - business analytics
