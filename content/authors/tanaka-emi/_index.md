@@ -5,7 +5,7 @@ email: emi.tanaka@monash.edu
 name: Emi Tanaka
 organizations:
 - name: Monash University
-role: Lecturer in Statistics
+role: Senior Lecturer in Statistics
 social:
 - icon: link
   icon_pack: fas

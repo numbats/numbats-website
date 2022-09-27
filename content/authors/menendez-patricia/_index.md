@@ -5,7 +5,7 @@ email: Patricia.Menendez@monash.edu
 name: Patricia Menendez
 organizations:
 - name: Monash University
-role: Lecturer in Statistics
+role: Senior Lecturer in Statistics
 social:
 - icon: link
   icon_pack: fas

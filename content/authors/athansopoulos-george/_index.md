@@ -5,7 +5,7 @@ email: george.athanasopoulos@monash.edu
 name: George Athanasopoulos
 organizations:
 - name: Monash University
-role: Professor of Statistics and Deputy Head of Department 
+role: Professor of Statistics and Head of Department 
 social:
 - icon: envelope
   icon_pack: fas

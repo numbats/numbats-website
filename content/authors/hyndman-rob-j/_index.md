@@ -5,7 +5,7 @@ email: Rob.Hyndman@monash.edu
 name: Rob J Hyndman
 organizations:
 - name: Monash University
-role: Professor of Statistics and Head of Department
+role: Professor of Statistics
 social:
 - icon: link
   icon_pack: fas

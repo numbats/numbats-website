@@ -5,7 +5,7 @@ email: Ruben.LoaizaMaya@monash.edu
 name: Ruben Loaiza Maya
 organizations:
 - name: Monash University
-role: Lecturer in Econometrics
+role: Senior Lecturer in Econometrics
 social:
 - icon: link
   icon_pack: fas
