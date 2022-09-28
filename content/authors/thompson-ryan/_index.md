@@ -12,6 +12,5 @@ interests:
 - forecasting
 - mathematical optimisation
 user_groups:
-- PhD Student
-- Current
+- Alumni
 ---
