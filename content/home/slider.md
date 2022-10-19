@@ -16,8 +16,24 @@ height = ""
 # Slides.
 # Duplicate an `[[item]]` block to add more slides.
 [[item]]
-  title = "Welcome to new faculty member Jessica Leung!"
-  content = ":smile:"
+  title = "WOMBAT is back in 2022, on Communicating with Data, with keynote Amanda Cox."
+  align = "center"  # Choose `center`, `left`, or `right`.
+  
+  # Overlay a color or image (optional).
+  #   Deactivate an option by commenting out the line, prefixing it with `#`.
+  # overlay_color = "#666"  # An HTML color value.
+  overlay_img = "numbats_webimage.jpeg"  # Image path relative to your `static/img/` folder.
+  overlay_filter = 0.5  # Darken the image. Value in range 0-1.
+
+   # Call to action button (optional).
+   #   Activate the button by specifying a URL and button label below.
+   #   Deactivate by commenting out parameters, prefixing lines with `#`.
+   cta_label = "More information about WOMBAT 2022 is here"
+   cta_url = "https://numbats.github.io/WOMBAT2022/"
+
+[[item]]
+  title = "Welcome to Kate Saunders and Jayani Lakshika!"
+  content = ":smile: We're excited to welcome Kate to our faculty, based at Caulfield and new PhD student Jayani! And sadly farewell to Dan Simpson, good luck in your new endeavours."
   align = "center"  # Choose `center`, `left`, or `right`.
   
   # Overlay a color or image (optional).

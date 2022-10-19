@@ -16,14 +16,11 @@ social:
 - icon: github
   icon_pack: fab
   link: https://github.com/dpsimpson
-- icon: envelope
-  icon_pack: fas
-  link: "mailto:dan.simpson@monash.edu"
 interests:
 - spatial statistics
 - bayesian methods
 - computational statistics
 user_groups:
 - Faculty
-- Current
+- Alumni
 ---

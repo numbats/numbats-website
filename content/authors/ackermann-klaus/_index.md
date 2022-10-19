@@ -5,7 +5,7 @@ email: Klaus.Ackermann@monash.edu
 name: Klaus Ackermann
 organizations:
 - name: Monash University
-role: Lecturer in Statistics
+role: Senior Lecturer in Statistics
 social:
 - icon: envelope
   icon_pack: fas

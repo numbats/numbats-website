@@ -26,5 +26,5 @@ interests:
 - forecasting
 user_groups:
 - PhD Student
-- Current
+- Alumni
 ---
