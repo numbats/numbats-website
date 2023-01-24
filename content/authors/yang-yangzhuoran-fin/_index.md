@@ -1,7 +1,7 @@
 ---
 authors:
 - yang-yangzhuoran-fin
-email:Fin.Yang@monash.edu
+email: Fin.Yang@monash.edu
 name: Yangzhuoran Fin Yang
 organizations:
 - name: Monash University
@@ -23,10 +23,10 @@ social:
   icon_pack: fas
   link: "mailto:Fin.Yang@monash.edu"
 interests:
-- Forecasting
-- Optimisation
-- Financial Econometrics
-- Data Analysis
+- forecasting
+- optimisation
+- financial econometrics
+- data analysis
 user_groups:
 - Current
 ---

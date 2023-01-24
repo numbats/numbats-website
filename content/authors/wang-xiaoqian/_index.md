@@ -23,10 +23,10 @@ social:
   icon_pack: fas
   link: "mailto:Xiaoqian.Wang@monash.edu"
 interests:
-- Time Series Forecasting
-- Data Analysis
-- Distributed Computing
-- Statistical Modeling
+- time series forecasting
+- data analysis
+- distributed computing
+- ctatistical modeling
 user_groups:
 - Current
 ---
